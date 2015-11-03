@@ -98,6 +98,11 @@ class cloudera::params {
     default => $::cloudera_proxy_password,
   }
 
+  $manage_sysctl = $::cloudera_manage_sysctl ? {
+    undef => true,
+    default => $::cloudera_manage_sysctl,
+  }
+
   # Since the top scope variable could be a string (if from an ENC), we might
   # need to convert it to a boolean.
   $autoupgrade = $::cloudera_autoupgrade ? {
