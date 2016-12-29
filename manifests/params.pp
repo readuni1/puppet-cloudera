@@ -14,13 +14,20 @@
 # Copyright (C) 2013 Mike Arnold, unless otherwise noted.
 #
 class cloudera::params {
-  # Customize these values if you (for example) mirror public YUM repos to your
-  # internal network.
-  $yum_priority = '50'
-  $yum_protect = '0'
 
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
+
+  $yum_repo_priority = $::cloudera_yum_repo_priority ? {
+    undef   => '50',
+    default => $::cloudera_yum_repo_priority,
+  }
+
+  $yum_repo_protect = $::cloudera_yum_repo_protect ? {
+    undef   => '0',
+    default => $::cloudera_yum_repo_protect,
+  }
+
   $cdh_reposerver = $::cloudera_cdh_reposerver ? {
     undef   => 'http://archive.cloudera.com',
     default => $::cloudera_cdh_reposerver,
