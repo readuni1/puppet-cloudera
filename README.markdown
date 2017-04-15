@@ -1,8 +1,8 @@
-#Cloudera Manager
+# Cloudera Manager
 
 [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-cloudera.png?branch=master)](http://travis-ci.org/razorsedge/puppet-cloudera)
 
-####Table of Contents
+#### Table of Contents
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
@@ -24,19 +24,19 @@
     * [Issues](#issues)
 7. [Development - Guide for contributing to the module](#development)
 
-##Overview
+## Overview
 
 This Puppet module manages the installation and configuration of [Cloudera Manager](http://www.cloudera.com/content/cloudera/en/products-and-services/cloudera-enterprise/cloudera-manager.html), a management application for Apache Hadoop, on the Cloudera official [supported operating systems](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_cm_requirements.html?scroll=cmig_topic_4_1_unique_1).
 
-##Module Description
+## Module Description
 
 This module manages the installation of [Cloudera Manager](http://www.cloudera.com/content/cloudera/en/products-and-services/cloudera-enterprise/cloudera-manager.html), a management application for Apache Hadoop.  It follows the standards written in the [Cloudera Manager Installation Guide](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/Cloudera-Manager-Installation-Guide.html) "[Installation Path B - Installation Using Your Own Method](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_install_path_B.html)".  By default, this module assumes that [parcels](http://blog.cloudera.com/blog/2013/05/faq-understanding-the-parcel-binary-distribution-format/) will be used to deploy [Cloudera's Distribution of Apache Hadoop (CDH)](http://www.cloudera.com/content/cloudera/en/products-and-services/cdh.html) and related software.  If parcels are not desired, this module can also manage the installation of CDH including HDFS & MapReduce, Impala, Sentry, Search, Spark, HBase, and [LZO compression](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_install_lzo_compression.html).  The module can also configure [TLS security](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Administration-Guide/cm5ag_config_tls_security.html) of the Cloudera Manager communications channels, and set up Cloudera Manager to use an alternative to the [embedded database](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_install_path_B.html?scroll=cmig_topic_6_6_5_unique_1).
 
 [![Cloudera Certified](https://raw.githubusercontent.com/razorsedge/puppet-cloudera/master/logo_Cloudera_Certified.jpg)](http://www.cloudera.com/content/cloudera/en/partners/certified-technology.html) This module is certified on Cloudera 5.
 
-##Setup
+## Setup
 
-###What this module affects
+### What this module affects
 
 * Installs the Cloudera software repository for CM.
 * Installs Oracle Java Development Kit (JDK) 7.
@@ -52,11 +52,11 @@ This module manages the installation of [Cloudera Manager](http://www.cloudera.c
 * Optionally installs most components of CDH 5 including HBase, Impala, Search, and Spark.
 * Optionally installs GPL Extras (LZO).
 
-###Requirements
+### Requirements
 
 Please read through the [Cloudera Manager Requirements](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_cm_requirements.html) document in order to discover all of the entities (ie operating systems, databases, and browsers) supported by Cloudera Manager.  Pay close attention to the [Resource Requirements](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_cm_requirements.html?scroll=cmig_topic_4_3_2_unique_1) and [Networking and Security Requirements](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_cm_requirements.html?scroll=cmig_topic_4_3_3_unique_1) sections.  There are a number of requirements that this module cannot easily configure for your environment (ie No blocking by Security-Enhanced Linux (SELinux)) and which you must ensure are correct on your platform.
 
-###Beginning with this module
+### Beginning with this module
 
 Most nodes  that will be a part of a Hadoop cluster will use this declaration.
 ```puppet
@@ -73,9 +73,9 @@ class { '::cloudera':
 }
 ```
 
-###Upgrading
+### Upgrading
 
-####Deprecation Warning
+#### Deprecation Warning
 
 - The default for `use_parcels` will switch to `true` before the 1.0.0 release.
 
@@ -153,11 +153,11 @@ class { 'cloudera':
 - The [herculesteam/augeasproviders](https://forge.puppetlabs.com/herculesteam/augeasproviders) modules will replace [domcleal/augeasproviders](https://forge.puppetlabs.com/domcleal/augeasproviders) for the 3.0.0 release.
 
 
-##Usage
+## Usage
 
 All interaction with the cloudera module can be done through the main cloudera class.  This means you can simply toggle the options in `::cloudera` to have full functionality of the module.
 
-###TLS Security
+### TLS Security
 Level 1: [Configuring TLS Encryption only for Cloudera Manager](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Administration-Guide/cm5ag_config_tls_encr.html)
 
 Level 2: [Configuring TLS Authentication of Server to Agents](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Administration-Guide/cm5ag_config_tls_auth.html)
@@ -200,7 +200,7 @@ file { "/etc/pki/tls/certs/${::fqdn}-cloudera_manager.crt": }
 file { "/etc/pki/tls/private/${::fqdn}-cloudera_manager.key": }
 ```
 
-###External Database
+### External Database
 
 If you decide not to use the embedded database, the Cloudera Manager server database configuration can be completed by configuring this module to call the [`scm_prepare_database.sh`](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_install_path_B.html?scroll=cmig_topic_6_6_5_unique_1__section_y3j_pyp_bm_unique_1) script.  The external database must be configured and ready for connection with the supplied credentials via some method outside of this module.
 
@@ -216,7 +216,7 @@ class { '::cloudera':
 }
 ```
 
-###Parcels
+### Parcels
 
 [Parcel](http://blog.cloudera.com/blog/2013/05/faq-understanding-the-parcel-binary-distribution-format/) is an alternative binary distribution format supported by Cloudera Manager 4.5+ that simplifies distribution of CDH and other Cloudera products.  By default, this module assumes software deployment of CDH via parcel.  To allow Cloudera Manager to install CDH via RPMs (or DEBs) instead of parcels, just set `use_parcels => false`.
 
@@ -253,7 +253,7 @@ class { '::cloudera::cm5': } ->
 class { '::cloudera::cm5::server': }
 ```
 
-###LZO Compression
+### LZO Compression
 
 Hadoop-specific [LZO](http://www.oberhumer.com/opensource/lzo/) compression libraries are available in the Cloudera GPL Extras repository.  To deploy the Hadoop-specific and also the native libraries on a non-parcel system just add `install_lzo => true` to the class declaration.  Additional configuration in Cloudera Manager will be required to [activate](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_install_lzo_compression.html) the functionality (ignore the mention of parcels in the link to the documentation).
 
@@ -275,15 +275,15 @@ class { '::cloudera':
 }
 ```
 
-##Reference
+## Reference
 
-###Classes
+### Classes
 
-####Public Classes
+#### Public Classes
 
 * cloudera: Installs and configures Cloudera Manager.  Includes most other classes.
 
-####Private Classes
+#### Private Classes
 
 * cloudera::java5: Installs the Oracle Java Development Kit (JDK) from the Cloudera Manager repository.
 * cloudera::java5::jce: Installs the Oracle Java Cryptography Extension (JCE) unlimited strength jurisdiction policy files.
@@ -309,249 +309,249 @@ class { '::cloudera':
 * cloudera::search::repo
 * cloudera::lzo
 
-###Parameters
+### Parameters
 
 The following parameters are available in the cloudera module:
 
-####`ensure`
+#### `ensure`
 
 Ensure if present or absent.
 Default: present
 
-####`autoupgrade`
+#### `autoupgrade`
 
 Upgrade package automatically, if there is a newer version.
 Default: false
 
-####`service_ensure`
+#### `service_ensure`
 
 Ensure if service is running or stopped.
 Default: running
 
-####`service_enable`
+#### `service_enable`
 
 Start service at boot.
 Default: true
 
-####`cdh_reposerver`
+#### `cdh_reposerver`
 
 URI of the YUM server.
 Default: http://archive.cloudera.com
 
-####`cdh_repopath`
+#### `cdh_repopath`
 
 The path to add to the $cdh_reposerver URI.
 Only set this if your platform is not supported or you know what you are doing.
 Default: auto-set, platform specific
 
-####`cdh_version`
+#### `cdh_version`
 
 The version of Cloudera's Distribution, including Apache Hadoop to install.
 Default: 5
 
-####`cm_reposerver`
+#### `cm_reposerver`
 
 URI of the YUM server.
 Default: http://archive.cloudera.com
 
-####`cm_repopath`
+#### `cm_repopath`
 
 The path to add to the $cm_reposerver URI.
 Only set this if your platform is not supported or you know what you are doing.
 Default: auto-set, platform specific
 
-####`cm_version`
+#### `cm_version`
 
 The version of Cloudera Manager to install.
 Default: 5
 
-####`cm5_repopath`
+#### `cm5_repopath`
 
 The path to add to the $cm_reposerver URI.
 Only set this if your platform is not supported or you know what you are doing.
 Default: auto-set, platform specific
 
-####`ci_reposerver`
+#### `ci_reposerver`
 
 URI of the YUM server.
 Default: http://archive.cloudera.com
 
-####`ci_repopath`
+#### `ci_repopath`
 
 The path to add to the $ci_reposerver URI.
 Only set this if your platform is not supported or you know what you are doing.
 Default: auto-set, platform specific
 
-####`ci_version`
+#### `ci_version`
 
 The version of Cloudera Impala to install.
 Default: 1
 
-####`cs_reposerver`
+#### `cs_reposerver`
 
 URI of the YUM server.
 Default: http://archive.cloudera.com
 
-####`cs_repopath`
+#### `cs_repopath`
 
 The path to add to the $cs_reposerver URI.
 Only set this if your platform is not supported or you know what you are doing.
 Default: auto-set, platform specific
 
-####`cs_version`
+#### `cs_version`
 
 The version of Cloudera Search to install.
 Default: 1
 
-####`cg_reposerver`
+#### `cg_reposerver`
 
 URI of the YUM server.
 Default: http://archive.cloudera.com
 
-####`cg_repopath`
+#### `cg_repopath`
 
 The path to add to the $cg_reposerver URI.
 Only set this if your platform is not supported or you know what you are doing.
 Default: auto-set, platform specific
 
-####`cg_version`
+#### `cg_version`
 
 The version of Cloudera Search to install.
 Default: 5
 
-####`cm_server_host`
+#### `cm_server_host`
 
 Hostname of the Cloudera Manager server.
 Default: localhost
 
-####`cm_server_port`
+#### `cm_server_port`
 
 Port to which the Cloudera Manager server is listening.
 Default: 7182
 
-####`use_tls`
+#### `use_tls`
 
 Whether to enable TLS on the Cloudera Manager server and agent.
 Default: false
 
-####`verify_cert_file`
+#### `verify_cert_file`
 
 The file holding the public key of the Cloudera Manager server as well as the chain of signing certificate authorities. PEM format.
 Default: /etc/pki/tls/certs/cloudera_manager.crt or /etc/ssl/certs/cloudera_manager.crt
 
-####`use_parcels`
+#### `use_parcels`
 
 Whether to install CDH software via parcels or packages.
 Default: true
 
-####`install_lzo`
+#### `install_lzo`
 
 Whether to install the native LZO compression library packages.  If *use_parcels* is false, then also install the Hadoop-specific LZO compression library packages.  You must configure and deploy the GPLextras parcel repository if *use_parcels* is true.
 Default: false
 
-####`install_java`
+#### `install_java`
 
 Whether to install the Cloudera supplied Oracle Java Development Kit.  If this is set to false, then an Oracle JDK will have to be installed prior to applying this module.
 Default: true
 
-####`install_jce`
+#### `install_jce`
 
 Whether to install the Oracle Java Cryptography Extension unlimited strength jurisdiction policy files.  This requires manual download of the zip file.  See files/README_JCE.md for download instructions.
 Default: false
 
-####`install_cmserver`
+#### `install_cmserver`
 
 Whether to install the Cloudera Manager Server.  This should only be set to true on one host in your environment.
 Default: false
 
-####`database_name`
+#### `database_name`
 
 Name of the database to use for Cloudera Manager.
 Default: scm
 
-####`username`
+#### `username`
 
 Name of the user to use to connect to *database_name*.
 Default: scm
 
-####`password`
+#### `password`
 
 Password to use to connect to *database_name*.
 Default: scm
 
-####`db_host`
+#### `db_host`
 
 Host to connect to for *database_name*.
 Default: localhost
 
-####`db_port`
+#### `db_port`
 
 Port on *db_host* to connect to for *database_name*.
 Default: 3306
 
-####`db_user`
+#### `db_user`
 
 Administrative database user on *db_host*.
 Default: root
 
-####`db_pass`
+#### `db_pass`
 
 Administrative database user *db_user* password.
 Default:
 
-####`db_type`
+#### `db_type`
 
 Which type of database to use for Cloudera Manager.  Valid options are embedded, mysql, oracle, or postgresql.
 Default: embedded
 
-####`server_ca_file`
+#### `server_ca_file`
 
 The file holding the PEM public key of the Cloudera Manager server certificate authority.
 Default: /etc/pki/tls/certs/cloudera_manager-ca.crt or /etc/ssl/certs/cloudera_manager-ca.crt
 
-####`server_cert_file`
+#### `server_cert_file`
 
 The file holding the PEM public key of the Cloudera Manager server.
 Default: /etc/pki/tls/certs/${::fqdn}-cloudera_manager.crt or /etc/ssl/certs/${::fqdn}-cloudera_manager.crt
 
-####`server_key_file`
+#### `server_key_file`
 
 The file holding the PEM private key of the Cloudera Manager server.
 Default: /etc/pki/tls/private/${::fqdn}-cloudera_manager.key or /etc/ssl/private/${::fqdn}-cloudera_manager.key
 
-####`server_chain_file`
+#### `server_chain_file`
 
 The file holding the PEM public key(s) of the Cloudera Manager server intermediary certificate authority.
 Default: none
 
-####`server_keypw`
+#### `server_keypw`
 
 The password used to protect the keystore.
 Default: none
 
-####`proxy`
+#### `proxy`
 
 The URL to the proxy server for the YUM repositories.
 Default: absent
 
-####`proxy_username`
+#### `proxy_username`
 
 The username for the YUM proxy.
 Default: absent
 
-####`proxy_password`
+#### `proxy_password`
 
 The password for the YUM proxy.
 Default: absent
 
-####`parcel_dir`
+#### `parcel_dir`
 
 The directory where parcels are downloaded and distributed.
 Default: /opt/cloudera/parcels
 
-##Limitations
+## Limitations
 
-###OS Support:
+### OS Support:
 
 Cloudera official [supported operating systems for CM4](http://www.cloudera.com/content/cloudera/en/documentation/cloudera-manager/v4-latest/Cloudera-Manager-Installation-Guide/cmig_cm_requirements.html#cmig_topic_4_1_unique_1) and [supported operating systems for CM5](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_cm_requirements.html?scroll=cmig_topic_4_1_unique_1).
 
@@ -559,7 +559,7 @@ Cloudera official [supported operating systems for CM4](http://www.cloudera.com/
 * SuSE family   - tested on SLES 11SP3
 * Debian family - tested on Debian 6.0.7, Debian 7.0, Ubuntu 10.04.4 LTS, and Ubuntu 12.04.2 LTS
 
-###Software Support:
+### Software Support:
 
 * Cloudera Manager    - tested with 4.1.2, 4.8.0, and 5.0.0beta2
 * CDH                 - tested with 4.1.2 and 4.5.0, 5.0.0beta2
@@ -567,7 +567,7 @@ Cloudera official [supported operating systems for CM4](http://www.cloudera.com/
 * Cloudera Search     - tested with 1.1.0
 * Cloudera GPL Extras - tested with 4.3.0 and 5.0.0
 
-###Notes:
+### Notes:
 
 * Supports Top Scope variables (i.e. via Dashboard) and Parameterized Classes.
 * Based on the [Cloudera Manager 5.0.0 Beta 2 Installation Guide](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/PDF/Cloudera-Manager-Installation-Guide.pdf)
@@ -577,17 +577,17 @@ Cloudera official [supported operating systems for CM4](http://www.cloudera.com/
 * Osfamily RedHat 5 requires the EPEL YUM repository when installing LZO support.
 * This module does not support upgrading from CDH4 to CDH5 packages, including Impala, Search, and GPL Extras.
 
-###Issues:
+### Issues:
 
 * Need external module support for the Oracle Instant Client JDBC.
 * When using an external PostgreSQL server that is on the same host as the CM server, PostgreSQL must be configured to accept connections with md5 password authentication.
 * Osfamily RedHat 5 requires Python 2.6 from the EPEL YUM repository when installing the Hue service.
 
-###TODO:
+### TODO:
 
 See [TODO.md](TODO.md) for more items.
 
-##Development
+## Development
 
 Please see [DEVELOP.md](DEVELOP.md) for information on how to contribute.
 
