@@ -589,7 +589,7 @@ See [TODO.md](TODO.md) for more items.
 
 ## Development
 
-Please see [DEVELOP.md](DEVELOP.md) for information on how to contribute.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute.
 
 Copyright (C) 2013 Mike Arnold <mike@razorsedge.org>
 
