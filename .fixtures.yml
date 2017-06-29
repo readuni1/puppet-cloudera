@@ -23,5 +23,6 @@ fixtures:
       ref: "1.8.0"
     augeasproviders_core: "https://github.com/hercules-team/augeasproviders_core.git"
     augeasproviders_sysctl: "https://github.com/hercules-team/augeasproviders_sysctl.git"
+    inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"
   symlinks:
     cloudera: "#{source_dir}"

@@ -122,56 +122,58 @@ class cloudera::cm (
 #    notify  => Service['cloudera-scm-agent'],
 #  }
 
-  Ini_setting {
-    ensure  => present,
-    path    => '/etc/cloudera-scm-agent/config.ini',
-    require => Package['cloudera-manager-agent'],
-    notify  => Service['cloudera-scm-agent'],
-  }
+  if $file_ensure == 'present' {
+    Ini_setting {
+      ensure  => present,
+      path    => '/etc/cloudera-scm-agent/config.ini',
+      require => Package['cloudera-manager-agent'],
+      notify  => Service['cloudera-scm-agent'],
+    }
 
-  ini_setting { '/etc/cloudera-scm-agent/config.ini#General#server_host':
-    section => 'General',
-    setting => 'server_host',
-    value   => $server_host,
-  }
-  ini_setting { '/etc/cloudera-scm-agent/config.ini#General#server_port':
-    section => 'General',
-    setting => 'server_port',
-    value   => $server_port,
-  }
-  ini_setting { '/etc/cloudera-scm-agent/config.ini#General#listening_hostname':
-    section => 'General',
-    setting => 'listening_hostname',
-    value   => $::fqdn,
-  }
-  ini_setting { '/etc/cloudera-scm-agent/config.ini#General#parcel_dir':
-    section => 'General',
-    setting => 'parcel_dir',
-    value   => $parcel_dir,
-  }
+    ini_setting { '/etc/cloudera-scm-agent/config.ini#General#server_host':
+      section => 'General',
+      setting => 'server_host',
+      value   => $server_host,
+    }
+    ini_setting { '/etc/cloudera-scm-agent/config.ini#General#server_port':
+      section => 'General',
+      setting => 'server_port',
+      value   => $server_port,
+    }
+    ini_setting { '/etc/cloudera-scm-agent/config.ini#General#listening_hostname':
+      section => 'General',
+      setting => 'listening_hostname',
+      value   => $::fqdn,
+    }
+    ini_setting { '/etc/cloudera-scm-agent/config.ini#General#parcel_dir':
+      section => 'General',
+      setting => 'parcel_dir',
+      value   => $parcel_dir,
+    }
 
-  if $use_tls {
-    ini_setting { '/etc/cloudera-scm-agent/config.ini#Security#use_tls':
-      section => 'Security',
-      setting => 'use_tls',
-      value   => '1',
-    }
-    ini_setting { '/etc/cloudera-scm-agent/config.ini#Security#verify_cert_file':
-      section => 'Security',
-      setting => 'verify_cert_file',
-      value   => $verify_cert_file,
-    }
-  } else {
-    ini_setting { '/etc/cloudera-scm-agent/config.ini#Security#use_tls':
-      section => 'Security',
-      setting => 'use_tls',
-      value   => '0',
-    }
-    ini_setting { '/etc/cloudera-scm-agent/config.ini#Security#verify_cert_file':
-      ensure  => absent,
-      section => 'Security',
-      setting => 'verify_cert_file',
-      value   => $verify_cert_file,
+    if $use_tls {
+      ini_setting { '/etc/cloudera-scm-agent/config.ini#Security#use_tls':
+        section => 'Security',
+        setting => 'use_tls',
+        value   => '1',
+      }
+      ini_setting { '/etc/cloudera-scm-agent/config.ini#Security#verify_cert_file':
+        section => 'Security',
+        setting => 'verify_cert_file',
+        value   => $verify_cert_file,
+      }
+    } else {
+      ini_setting { '/etc/cloudera-scm-agent/config.ini#Security#use_tls':
+        section => 'Security',
+        setting => 'use_tls',
+        value   => '0',
+      }
+      ini_setting { '/etc/cloudera-scm-agent/config.ini#Security#verify_cert_file':
+        ensure  => absent,
+        section => 'Security',
+        setting => 'verify_cert_file',
+        value   => $verify_cert_file,
+      }
     }
   }
 

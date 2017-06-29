@@ -30,20 +30,54 @@ describe 'cloudera::cm5', :type => 'class' do
     it { should compile.with_all_deps }
     it { should contain_package('cloudera-manager-agent').with_ensure('present') }
     it { should contain_package('cloudera-manager-daemons').with_ensure('present') }
-    it { should contain_file('scm-config.ini').with(
-      :ensure => 'present',
-      :path   => '/etc/cloudera-scm-agent/config.ini'
+#    it { should contain_file('scm-config.ini').with(
+#      :ensure => 'present',
+#      :path   => '/etc/cloudera-scm-agent/config.ini'
+#    )}
+#    it 'should contain File[scm-config.ini] with correct contents' do
+#      verify_contents(catalogue, 'scm-config.ini', [
+#        'server_host=localhost',
+#        'server_port=7182',
+#        'listening_hostname=myhost',
+#        'parcel_dir=/opt/cloudera/parcels',
+#        'use_tls=0',
+#        '# verify_cert_file=',
+#      ])
+#    end
+    it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#General#server_host').with(
+      :ensure  => 'present',
+      :path    => '/etc/cloudera-scm-agent/config.ini',
+      :require => 'Package[cloudera-manager-agent]',
+      :notify  => 'Service[cloudera-scm-agent]',
+      :section => 'General',
+      :setting => 'server_host',
+      :value   => 'localhost'
     )}
-    it 'should contain File[scm-config.ini] with correct contents' do
-      verify_contents(catalogue, 'scm-config.ini', [
-        'server_host=localhost',
-        'server_port=7182',
-        'listening_hostname=myhost',
-        'parcel_dir=/opt/cloudera/parcels',
-        'use_tls=0',
-        '# verify_cert_file=',
-      ])
-    end
+    it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#General#server_port').with(
+      :section => 'General',
+      :setting => 'server_port',
+      :value   => '7182'
+    )}
+    it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#General#listening_hostname').with(
+      :section => 'General',
+      :setting => 'listening_hostname',
+      :value   => 'myhost'
+    )}
+    it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#General#parcel_dir').with(
+      :section => 'General',
+      :setting => 'parcel_dir',
+      :value   => '/opt/cloudera/parcels'
+    )}
+    it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#Security#use_tls').with(
+      :section => 'Security',
+      :setting => 'use_tls',
+      :value   => '0'
+    )}
+    it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#Security#verify_cert_file').with(
+      :ensure  => 'absent',
+      :section => 'Security',
+      :setting => 'verify_cert_file'
+    )}
     it { should contain_service('cloudera-scm-agent').with(
       :ensure     => 'running',
       :enable     => true,
@@ -70,7 +104,8 @@ describe 'cloudera::cm5', :type => 'class' do
       end
       it { should contain_package('cloudera-manager-agent').with_ensure('absent') }
       it { should contain_package('cloudera-manager-daemons').with_ensure('absent') }
-      it { should contain_file('scm-config.ini').with_ensure('absent') }
+#      it { should contain_file('scm-config.ini').with_ensure('absent') }
+      it { should_not contain_ini_setting('/etc/cloudera-scm-agent/config.ini#General#server_host') }
       it { should contain_service('cloudera-scm-agent').with(
         :ensure => 'stopped',
         :enable => false
@@ -96,7 +131,8 @@ describe 'cloudera::cm5', :type => 'class' do
       end
       it { should contain_package('cloudera-manager-agent').with_ensure('latest') }
       it { should contain_package('cloudera-manager-daemons').with_ensure('latest') }
-      it { should contain_file('scm-config.ini').with_ensure('present') }
+#      it { should contain_file('scm-config.ini').with_ensure('present') }
+      it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#General#server_host').with_ensure('present') }
       it { should contain_service('cloudera-scm-agent').with(
         :ensure => 'running',
         :enable => true
@@ -133,15 +169,25 @@ describe 'cloudera::cm5', :type => 'class' do
         :server_port => '9000'
       }
       end
-      it { should contain_file('scm-config.ini').with_ensure('present') }
-      it 'should contain File[scm-config.ini] with correct contents' do
-        verify_contents(catalogue, 'scm-config.ini', [
-          'server_host=some.other.host',
-          'server_port=9000',
-          'listening_hostname=myhost',
-          'use_tls=0',
-        ])
-      end
+#      it { should contain_file('scm-config.ini').with_ensure('present') }
+#      it 'should contain File[scm-config.ini] with correct contents' do
+#        verify_contents(catalogue, 'scm-config.ini', [
+#          'server_host=some.other.host',
+#          'server_port=9000',
+#          'listening_hostname=myhost',
+#          'use_tls=0',
+#        ])
+#      end
+      it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#General#server_host').with(
+        :section => 'General',
+        :setting => 'server_host',
+        :value   => 'some.other.host'
+      )}
+      it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#General#server_port').with(
+        :section => 'General',
+        :setting => 'server_port',
+        :value   => '9000'
+      )}
     end
 
     describe 'use_tls => true' do
@@ -159,13 +205,23 @@ describe 'cloudera::cm5', :type => 'class' do
           :architecture           => 'x86_64'
         }
         end
-        it { should contain_file('scm-config.ini').with_ensure('present') }
-        it 'should contain File[scm-config.ini] with correct contents' do
-          verify_contents(catalogue, 'scm-config.ini', [
-            'use_tls=1',
-            'verify_cert_file=/etc/pki/tls/certs/cloudera_manager.crt',
-          ])
-        end
+#        it { should contain_file('scm-config.ini').with_ensure('present') }
+#        it 'should contain File[scm-config.ini] with correct contents' do
+#          verify_contents(catalogue, 'scm-config.ini', [
+#            'use_tls=1',
+#            'verify_cert_file=/etc/pki/tls/certs/cloudera_manager.crt',
+#          ])
+#        end
+        it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#Security#use_tls').with(
+          :section => 'Security',
+          :setting => 'use_tls',
+          :value   => '1'
+        )}
+        it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#Security#verify_cert_file').with(
+          :section => 'Security',
+          :setting => 'verify_cert_file',
+          :value   => '/etc/pki/tls/certs/cloudera_manager.crt'
+        )}
       end
 
       describe 'SLES' do
@@ -177,13 +233,23 @@ describe 'cloudera::cm5', :type => 'class' do
           :architecture           => 'x86_64'
         }
         end
-        it { should contain_file('scm-config.ini').with_ensure('present') }
-        it 'should contain File[scm-config.ini] with correct contents' do
-          verify_contents(catalogue, 'scm-config.ini', [
-            'use_tls=1',
-            'verify_cert_file=/etc/ssl/certs/cloudera_manager.crt',
-          ])
-        end
+#        it { should contain_file('scm-config.ini').with_ensure('present') }
+#        it 'should contain File[scm-config.ini] with correct contents' do
+#          verify_contents(catalogue, 'scm-config.ini', [
+#            'use_tls=1',
+#            'verify_cert_file=/etc/ssl/certs/cloudera_manager.crt',
+#          ])
+#        end
+        it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#Security#use_tls').with(
+          :section => 'Security',
+          :setting => 'use_tls',
+          :value   => '1'
+        )}
+        it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#Security#verify_cert_file').with(
+          :section => 'Security',
+          :setting => 'verify_cert_file',
+          :value   => '/etc/ssl/certs/cloudera_manager.crt'
+        )}
       end
 
       describe 'Ubuntu' do
@@ -197,13 +263,23 @@ describe 'cloudera::cm5', :type => 'class' do
           :lsbmajdistrelease      => '12'
         }
         end
-        it { should contain_file('scm-config.ini').with_ensure('present') }
-        it 'should contain File[scm-config.ini] with correct contents' do
-          verify_contents(catalogue, 'scm-config.ini', [
-            'use_tls=1',
-            'verify_cert_file=/etc/ssl/certs/cloudera_manager.crt',
-          ])
-        end
+#        it { should contain_file('scm-config.ini').with_ensure('present') }
+#        it 'should contain File[scm-config.ini] with correct contents' do
+#          verify_contents(catalogue, 'scm-config.ini', [
+#            'use_tls=1',
+#            'verify_cert_file=/etc/ssl/certs/cloudera_manager.crt',
+#          ])
+#        end
+        it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#Security#use_tls').with(
+          :section => 'Security',
+          :setting => 'use_tls',
+          :value   => '1'
+        )}
+        it { should contain_ini_setting('/etc/cloudera-scm-agent/config.ini#Security#verify_cert_file').with(
+          :section => 'Security',
+          :setting => 'verify_cert_file',
+          :value   => '/etc/ssl/certs/cloudera_manager.crt'
+        )}
       end
     end
   end
