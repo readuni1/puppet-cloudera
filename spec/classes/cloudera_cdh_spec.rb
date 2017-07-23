@@ -22,7 +22,9 @@ describe 'cloudera::cdh', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'CentOS',
-      :operatingsystemrelease => '6.0'
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
     it { should contain_class('cloudera::cdh::bigtop') }

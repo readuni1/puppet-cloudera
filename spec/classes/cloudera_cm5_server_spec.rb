@@ -21,7 +21,9 @@ describe 'cloudera::cm5::server', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'CentOS',
-      :operatingsystemrelease => '6.0'
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
     it { should compile.with_all_deps }
@@ -59,7 +61,9 @@ describe 'cloudera::cm5::server', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'OracleLinux',
-      :operatingsystemrelease => '6.0'
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
 
@@ -167,7 +171,9 @@ describe 'cloudera::cm5::server', :type => 'class' do
       :fqdn                   => 'myhost.example.com',
       :osfamily               => 'RedHat',
       :operatingsystem        => 'OracleLinux',
-      :operatingsystemrelease => '6.0'
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
 
@@ -236,7 +242,9 @@ describe 'cloudera::cm5::server', :type => 'class' do
       :fqdn                   => 'myhost.example.com',
       :osfamily               => 'RedHat',
       :operatingsystem        => 'OracleLinux',
-      :operatingsystemrelease => '6.0'
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
 
@@ -304,7 +312,12 @@ describe 'cloudera::cm5::server', :type => 'class' do
       :fqdn                   => 'myhost.example.com',
       :osfamily               => 'RedHat',
       :operatingsystem        => 'OracleLinux',
-      :operatingsystemrelease => '6.4'
+      :operatingsystemrelease => '6.4',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64',
+      :selinux                => 'false',
+      :id                     => 'root',
+      :path                   => '/bin:/usr/bin'
     }
     end
 
@@ -371,7 +384,9 @@ describe 'cloudera::cm5::server', :type => 'class' do
         :fqdn                   => 'localhost.localdomain',
         :osfamily               => 'RedHat',
         :operatingsystem        => 'OracleLinux',
-        :operatingsystemrelease => '6.0'
+        :operatingsystemrelease => '6.0',
+        :operatingsystemmajrelease => '6',
+        :architecture           => 'x86_64'
       }
       end
 
@@ -412,7 +427,9 @@ describe 'cloudera::cm5::server', :type => 'class' do
         :fqdn                   => 'localhost.localdomain',
         :osfamily               => 'Suse',
         :operatingsystem        => 'SLES',
-        :operatingsystemrelease => '11.0'
+        :operatingsystemrelease => '11.0',
+        :operatingsystemmajrelease => '11',
+        :architecture           => 'x86_64'
       }
       end
 
@@ -453,7 +470,11 @@ describe 'cloudera::cm5::server', :type => 'class' do
         :fqdn                   => 'localhost.localdomain',
         :osfamily               => 'Debian',
         :operatingsystem        => 'Debian',
-        :operatingsystemrelease => '7'
+        :operatingsystemrelease => '7.8',
+        :architecture           => 'amd64',
+        :lsbdistcodename        => 'wheezy',
+        :lsbdistid              => 'Debian',
+        :lsbmajdistrelease      => '7'
       }
       end
 
@@ -493,7 +514,9 @@ describe 'cloudera::cm5::server', :type => 'class' do
       :fqdn                   => 'localhost.localdomain',
       :osfamily               => 'RedHat',
       :operatingsystem        => 'OracleLinux',
-      :operatingsystemrelease => '6.0'
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
 

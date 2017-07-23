@@ -1,15 +1,23 @@
 fixtures:
   repositories:
     stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-    mysql: "https://github.com/puppetlabs/puppetlabs-mysql.git"
-    postgresql: "https://github.com/puppetlabs/puppet-postgresql.git"
+    mysql:
+      repo: "https://github.com/puppetlabs/puppetlabs-mysql.git"
+      ref: "3.11.0"
+    postgresql:
+      repo: "https://github.com/puppetlabs/puppet-postgresql.git"
+      ref: "4.9.0"
     concat:
       repo: "https://github.com/puppetlabs/puppetlabs-concat.git"
       ref: "1.2.1"
     staging: "https://github.com/nanliu/puppet-staging.git"
-    epel: "https://github.com/stahnma/puppet-module-epel.git"
+    epel:
+      repo: "https://github.com/stahnma/puppet-module-epel.git"
+      ref: "1.2.2"
     java_ks: "https://github.com/puppetlabs/puppetlabs-java_ks.git"
-    zypprepo: "https://github.com/deadpoint/puppet-zypprepo.git"
+    zypprepo:
+      repo: "https://github.com/deadpoint/puppet-zypprepo.git"
+      ref: "v1.0.2"
     apt:
       repo: "https://github.com/puppetlabs/puppetlabs-apt.git"
       ref: "1.8.0"

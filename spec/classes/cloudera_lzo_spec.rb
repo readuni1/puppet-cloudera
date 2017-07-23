@@ -24,7 +24,9 @@ describe 'cloudera::lzo', :type => 'class' do
       let :facts do {
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '5.10'
+        :operatingsystemrelease => '5.10',
+        :operatingsystemmajrelease => '5',
+        :architecture           => 'x86_64'
       }
       end
       it { should contain_class('epel') }
@@ -36,7 +38,9 @@ describe 'cloudera::lzo', :type => 'class' do
       let :facts do {
         :osfamily               => 'RedHat',
         :operatingsystem        => 'OracleLinux',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6',
+        :architecture           => 'x86_64'
       }
       end
       it { should_not contain_class('epel') }
@@ -48,7 +52,11 @@ describe 'cloudera::lzo', :type => 'class' do
       let :facts do {
         :osfamily               => 'Debian',
         :operatingsystem        => 'Ubuntu',
-        :operatingsystemrelease => '10.04'
+        :operatingsystemrelease => '10.04',
+        :architecture           => 'amd64',
+        :lsbdistcodename        => 'lucid',
+        :lsbdistid              => 'Ubuntu',
+        :lsbmajdistrelease      => '10'
       }
       end
       it { should_not contain_class('epel') }
@@ -60,7 +68,11 @@ describe 'cloudera::lzo', :type => 'class' do
       let :facts do {
         :osfamily               => 'Debian',
         :operatingsystem        => 'Debian',
-        :operatingsystemrelease => '6.0.7'
+        :operatingsystemrelease => '6.0.7',
+        :architecture           => 'amd64',
+        :lsbdistcodename        => 'squeeze',
+        :lsbdistid              => 'Debian',
+        :lsbmajdistrelease      => '6'
       }
       end
       it { should_not contain_class('epel') }
@@ -72,7 +84,9 @@ describe 'cloudera::lzo', :type => 'class' do
       let :facts do {
         :osfamily               => 'Suse',
         :operatingsystem        => 'SLES',
-        :operatingsystemrelease => '11.1'
+        :operatingsystemrelease => '11.1',
+        :operatingsystemmajrelease => '11',
+        :architecture           => 'x86_64'
       }
       end
       it { should_not contain_class('epel') }

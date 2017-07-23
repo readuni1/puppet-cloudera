@@ -23,6 +23,7 @@ describe 'cloudera::cm5::repo', :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
         :operatingsystemrelease => '6.3',
+        :operatingsystemmajrelease => '6',
         :architecture           => 'x86_64'
       }
       end
@@ -55,6 +56,7 @@ describe 'cloudera::cm5::repo', :type => 'class' do
         :osfamily               => 'Suse',
         :operatingsystem        => 'SLES',
         :operatingsystemrelease => '11.1',
+        :operatingsystemmajrelease => '11',
         :architecture           => 'x86_64'
       }
       end
@@ -90,8 +92,9 @@ describe 'cloudera::cm5::repo', :type => 'class' do
         :operatingsystem        => 'Debian',
         :operatingsystemrelease => '6.0.7',
         :architecture           => 'amd64',
+        :lsbdistcodename        => 'squeeze',
         :lsbdistid              => 'Debian',
-        :lsbdistcodename        => 'squeeze'
+        :lsbmajdistrelease      => '6'
       }
       end
       it { should compile.with_all_deps }
@@ -115,8 +118,9 @@ describe 'cloudera::cm5::repo', :type => 'class' do
         :operatingsystem        => 'Ubuntu',
         :operatingsystemrelease => '12.04.2',
         :architecture           => 'amd64',
+        :lsbdistcodename        => 'precise',
         :lsbdistid              => 'Ubuntu',
-        :lsbdistcodename        => 'precise'
+        :lsbmajdistrelease      => '12'
       }
       end
       it { should compile.with_all_deps }
@@ -139,7 +143,9 @@ describe 'cloudera::cm5::repo', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'OracleLinux',
-      :operatingsystemrelease => '6.0'
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
 

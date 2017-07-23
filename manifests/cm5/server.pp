@@ -171,6 +171,8 @@ class cloudera::cm5::server (
 
   if $db_type != 'embedded' {
     $file_content = template("${module_name}/db.properties.erb")
+  } else {
+    $file_content = undef
   }
 
   package { 'cloudera-manager-server':
@@ -203,6 +205,8 @@ class cloudera::cm5::server (
 
   case $db_type {
     'embedded': {
+      $scmopts = undef
+      $scm_prepare_database_require = undef
       package { 'cloudera-manager-server-db':
         ensure => $package_ensure,
         name   => 'cloudera-manager-server-db-2',
@@ -224,6 +228,7 @@ class cloudera::cm5::server (
         $scmopts = "--host=${db_host} --port=${db_port} --scm-host=${::fqdn}"
         $scm_prepare_database_require = Package['cloudera-manager-server']
       } else {
+        $scmopts = undef
         #require '::mysql::server'
         Class['::mysql::server'] -> Exec['scm_prepare_database']
         $scm_prepare_database_require = [ Package['cloudera-manager-server'], Class['::mysql::server'], ]
@@ -242,6 +247,7 @@ class cloudera::cm5::server (
         $scmopts = "--host=${db_host} --port=${db_port} --scm-host=${::fqdn}"
         $scm_prepare_database_require = Package['cloudera-manager-server']
       } else {
+        $scmopts = undef
         #require '::oraclerdbms::server'
         #Class['::oraclerdbms::server'] -> Service['cloudera-scm-server']
         #$scm_prepare_database_require = [ Package['cloudera-manager-server'], Service['oracle'], ]
@@ -262,6 +268,7 @@ class cloudera::cm5::server (
         $scmopts = "--host=${db_host} --port=${db_port} --scm-host=${::fqdn}"
         $scm_prepare_database_require = Package['cloudera-manager-server']
       } else {
+        $scmopts = undef
         #require '::postgresql::server'
         Class['::postgresql::server'] -> Service['cloudera-scm-server']
         $scm_prepare_database_require = [ Package['cloudera-manager-server'], Class['::postgresql::server'], ]

@@ -22,7 +22,9 @@ describe 'cloudera::java5', :type => 'class' do
       let :facts do {
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '6.0'
+        :operatingsystemrelease => '6.0',
+        :operatingsystemmajrelease => '6',
+        :architecture           => 'x86_64'
       }
       end
       it { should compile.with_all_deps }
@@ -158,7 +160,11 @@ describe 'cloudera::java5', :type => 'class' do
       let :facts do {
         :osfamily               => 'Debian',
         :operatingsystem        => 'Debian',
-        :operatingsystemrelease => '7'
+        :operatingsystemrelease => '7.8',
+        :architecture           => 'amd64',
+        :lsbdistcodename        => 'wheezy',
+        :lsbdistid              => 'Debian',
+        :lsbmajdistrelease      => '7'
       }
       end
       it { should compile.with_all_deps }
@@ -181,7 +187,9 @@ describe 'cloudera::java5', :type => 'class' do
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'OracleLinux',
-      :operatingsystemrelease => '6.0'
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
 

@@ -22,7 +22,10 @@ describe 'cloudera::cdh5::hue', :type => 'class' do
 #      let(:params) {{}}
       let :facts do {
         :osfamily        => 'RedHat',
-        :operatingsystem => 'CentOS'
+        :operatingsystem => 'CentOS',
+        :operatingsystemrelease => '6.0',
+        :operatingsystemmajrelease => '6',
+        :architecture    => 'x86_64'
       }
       end
       it { should contain_package('hue').with_ensure('present') }
@@ -32,7 +35,12 @@ describe 'cloudera::cdh5::hue', :type => 'class' do
     context 'Ubuntu' do
       let :facts do {
         :osfamily        => 'Debian',
-        :operatingsystem => 'Ubuntu'
+        :operatingsystem => 'Ubuntu',
+        :operatingsystemrelease => '14.04',
+        :architecture    => 'amd64',
+        :lsbdistcodename => 'trusty',
+        :lsbdistid       => 'Ubuntu',
+        :lsbmajdistrelease      => '14'
       }
       end
       it { should_not contain_service('hue') }
