@@ -21,8 +21,12 @@ describe 'cloudera::cdh::hive::mysql', :type => 'class' do
     let(:pre_condition) { 'class {"mysql::server":}' }
     let(:params) {{ :password => 'myPass' }}
     let :facts do {
-      :osfamily        => 'RedHat',
-      :operatingsystem => 'CentOS'
+      :osfamily               => 'RedHat',
+      :operatingsystem        => 'CentOS',
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64',
+      :root_home              => '/root'
     }
     end
     it { should contain_class('mysql::bindings') }

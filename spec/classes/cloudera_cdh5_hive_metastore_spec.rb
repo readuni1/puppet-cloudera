@@ -21,7 +21,9 @@ describe 'cloudera::cdh5::hive::metastore', :type => 'class' do
     let(:params) {{}}
     let :facts do {
       :osfamily        => 'RedHat',
-      :operatingsystem => 'CentOS'
+      :operatingsystem => 'CentOS',
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6'
     }
     end
     it { should contain_package('hive-metastore').with_ensure('present') }

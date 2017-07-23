@@ -3,8 +3,8 @@ class { 'cloudera':
   cm_server_host => 'some.other.host',
   use_tls        => true,
   use_parcels    => true,
-} ->
-class { 'cloudera::java::jce': }
+}
+-> class { 'cloudera::java::jce': }
 file { '/etc/pki/tls/certs/cloudera_manager.crt':
   ensure => present,
   source => 'puppet:///modules/cloudera/cloudera_manager_chain.crt',

@@ -1,6 +1,6 @@
-class { 'cloudera::cm5::repo': } ->
-class { 'cloudera::java5': } ->
-class { 'cloudera::cm5::server':
+class { 'cloudera::cm5::repo': }
+-> class { 'cloudera::java5': }
+-> class { 'cloudera::cm5::server':
   db_type => 'mysql',
 }
 

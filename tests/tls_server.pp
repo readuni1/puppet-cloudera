@@ -3,9 +3,9 @@ class { 'cloudera':
   cm_server_host => $::fqdn,
   use_tls        => true,
   use_parcels    => true,
-} ->
-class { 'cloudera::java::jce': } ->
-class { 'cloudera::cm::server':
+}
+-> class { 'cloudera::java::jce': }
+-> class { 'cloudera::cm::server':
   use_tls      => true,
   server_keypw => 'myPassWord',
 }

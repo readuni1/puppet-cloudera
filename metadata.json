@@ -1,6 +1,6 @@
 {
   "name": "razorsedge-cloudera",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "razorsedge",
   "summary": "Deploy Cloudera Manager and Cloudera's Distribution, including Apache Hadoop (CDH).",
   "license": "Apache-2.0",
@@ -74,12 +74,8 @@
   ],
   "requirements": [
     {
-      "name": "pe",
-      "version_requirement": ">=3.3.0 <4.0.0"
-    },
-    {
       "name": "puppet",
-      "version_requirement": ">=2.7.20 <4.0.0"
+      "version_requirement": ">=2.7.20 <5.0.0"
     }
   ]
 }

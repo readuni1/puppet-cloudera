@@ -20,8 +20,11 @@ describe 'cloudera::impala', :type => 'class' do
   context 'on a supported operatingsystem, default parameters' do
     let(:params) {{}}
     let :facts do {
-      :osfamily        => 'RedHat',
-      :operatingsystem => 'CentOS'
+      :osfamily               => 'RedHat',
+      :operatingsystem        => 'CentOS',
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
     it { should contain_package('impala').with_ensure('present') }

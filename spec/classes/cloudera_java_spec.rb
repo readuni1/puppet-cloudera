@@ -20,8 +20,11 @@ describe 'cloudera::java', :type => 'class' do
   context 'on a supported operatingsystem, default parameters' do
     describe 'RedHat/SuSe' do
       let :facts do {
-        :osfamily        => 'RedHat',
-        :operatingsystem => 'CentOS'
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '6.0',
+        :operatingsystemmajrelease => '6',
+        :architecture           => 'x86_64'
       }
       end
       it { should compile.with_all_deps }
@@ -142,8 +145,13 @@ describe 'cloudera::java', :type => 'class' do
 
     describe 'Debian' do
       let :facts do {
-        :osfamily        => 'Debian',
-        :operatingsystem => 'Debian'
+        :osfamily               => 'Debian',
+        :operatingsystem        => 'Debian',
+        :operatingsystemrelease => '7.8',
+        :architecture           => 'amd64',
+        :lsbdistcodename        => 'wheezy',
+        :lsbdistid              => 'Debian',
+        :lsbmajdistrelease      => '7'
       }
       end
       it { should compile.with_all_deps }
@@ -164,8 +172,11 @@ describe 'cloudera::java', :type => 'class' do
 
   context 'on a supported operatingsystem, custom parameters' do
     let :facts do {
-      :osfamily        => 'RedHat',
-      :operatingsystem => 'OracleLinux'
+      :osfamily               => 'RedHat',
+      :operatingsystem        => 'OracleLinux',
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64'
     }
     end
 

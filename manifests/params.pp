@@ -21,88 +21,120 @@ class cloudera::params {
 
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
-  $cdh_reposerver = $::cloudera_cdh_reposerver ? {
-    undef   => 'http://archive.cloudera.com',
-    default => $::cloudera_cdh_reposerver,
+  $cloudera_cdh_reposerver = getvar('::cloudera_cdh_reposerver')
+  if $cloudera_cdh_reposerver {
+    $cdh_reposerver = $::cloudera_cdh_reposerver
+  } else {
+    $cdh_reposerver = 'http://archive.cloudera.com'
   }
 
-  $cm_reposerver = $::cloudera_cm_reposerver ? {
-    undef   => 'http://archive.cloudera.com',
-    default => $::cloudera_cm_reposerver,
+  $cloudera_cm_reposerver = getvar('::cloudera_cm_reposerver')
+  if $cloudera_cm_reposerver {
+    $cm_reposerver = $::cloudera_cm_reposerver
+  } else {
+    $cm_reposerver = 'http://archive.cloudera.com'
   }
 
-  $ci_reposerver = $::cloudera_ci_reposerver ? {
-    undef   => 'http://archive.cloudera.com',
-    default => $::cloudera_ci_reposerver,
+  $cloudera_ci_reposerver = getvar('::cloudera_ci_reposerver')
+  if $cloudera_ci_reposerver {
+    $ci_reposerver = $::cloudera_ci_reposerver
+  } else {
+    $ci_reposerver = 'http://archive.cloudera.com'
   }
 
-  $cs_reposerver = $::cloudera_cs_reposerver ? {
-    undef   => 'http://archive.cloudera.com',
-    default => $::cloudera_cs_reposerver,
+  $cloudera_cs_reposerver = getvar('::cloudera_cs_reposerver')
+  if $cloudera_cs_reposerver {
+    $cs_reposerver = $::cloudera_cs_reposerver
+  } else {
+    $cs_reposerver = 'http://archive.cloudera.com'
   }
 
-  $cg_reposerver = $::cloudera_cg_reposerver ? {
-    undef   => 'http://archive.cloudera.com',
-    default => $::cloudera_cg_reposerver,
+  $cloudera_cg_reposerver = getvar('::cloudera_cg_reposerver')
+  if $cloudera_cg_reposerver {
+    $cg_reposerver = $::cloudera_cg_reposerver
+  } else {
+    $cg_reposerver = 'http://archive.cloudera.com'
   }
 
-  $cm_server_host = $::cloudera_cm_server_host ? {
-    undef   => 'localhost',
-    default => $::cloudera_cm_server_host,
+  $cloudera_cm_server_host = getvar('::cloudera_cm_server_host')
+  if $cloudera_cm_server_host {
+    $cm_server_host = $::cloudera_cm_server_host
+  } else {
+    $cm_server_host = 'localhost'
   }
 
-  $cm_server_port = $::cloudera_cm_server_port ? {
-    undef   => '7182',
-    default => $::cloudera_cm_server_port,
+  $cloudera_cm_server_port = getvar('::cloudera_cm_server_port')
+  if $cloudera_cm_server_port {
+    $cm_server_port = $::cloudera_cm_server_port
+  } else {
+    $cm_server_port = '7182'
   }
 
-  $server_chain_file = $::cloudera_server_chain_file ? {
-    undef   => undef,
-    default => $::cloudera_server_chain_file,
+  $cloudera_server_chain_file = getvar('::cloudera_server_chain_file')
+  if $cloudera_server_chain_file {
+    $server_chain_file = $::cloudera_server_chain_file
+  } else {
+    $server_chain_file = undef
   }
 
-  $server_keypw = $::cloudera_server_keypw ? {
-    undef   => undef,
-    default => $::cloudera_server_keypw,
+  $cloudera_server_keypw = getvar('::cloudera_server_keypw')
+  if $cloudera_server_keypw {
+    $server_keypw = $::cloudera_server_keypw
+  } else {
+    $server_keypw = undef
   }
 
-  $oozie_ext = $::cloudera_oozie_ext ? {
-    undef   => 'http://archive.cloudera.com/gplextras/misc/ext-2.2.zip',
-    default => $::cloudera_oozie_ext,
+  $cloudera_oozie_ext = getvar('::cloudera_oozie_ext')
+  if $cloudera_oozie_ext {
+    $oozie_ext = $::cloudera_oozie_ext
+  } else {
+    $oozie_ext = 'http://archive.cloudera.com/gplextras/misc/ext-2.2.zip'
   }
 
 ### The following parameters should not need to be changed.
 
-  $ensure = $::cloudera_ensure ? {
-    undef => 'present',
-    default => $::cloudera_ensure,
+  $cloudera_ensure = getvar('::cloudera_ensure')
+  if $cloudera_ensure {
+    $ensure = $::cloudera_ensure
+  } else {
+    $ensure = 'present'
   }
 
-  $service_ensure = $::cloudera_service_ensure ? {
-    undef => 'running',
-    default => $::cloudera_service_ensure,
+  $cloudera_service_ensure = getvar('::cloudera_service_ensure')
+  if $cloudera_service_ensure {
+    $service_ensure = $::cloudera_service_ensure
+  } else {
+    $service_ensure = 'running'
   }
 
-  $proxy = $::cloudera_proxy ? {
-    undef => 'absent',
-    default => $::cloudera_proxy,
+  $cloudera_proxy = getvar('::cloudera_proxy')
+  if $cloudera_proxy {
+    $proxy = $::cloudera_proxy
+  } else {
+    $proxy = 'absent'
   }
 
-  $proxy_username = $::cloudera_proxy_username ? {
-    undef => 'absent',
-    default => $::cloudera_proxy_username,
+  $cloudera_proxy_username = getvar('::cloudera_proxy_username')
+  if $cloudera_proxy_username {
+    $proxy_username = $::cloudera_proxy_username
+  } else {
+    $proxy_username = 'absent'
   }
 
-  $proxy_password = $::cloudera_proxy_password ? {
-    undef => 'absent',
-    default => $::cloudera_proxy_password,
+  $cloudera_proxy_password = getvar('::cloudera_proxy_password')
+  if $cloudera_proxy_password {
+    $proxy_password = $::cloudera_proxy_password
+  } else {
+    $proxy_password = 'absent'
   }
 
   # Since the top scope variable could be a string (if from an ENC), we might
   # need to convert it to a boolean.
-  $autoupgrade = $::cloudera_autoupgrade ? {
-    undef => false,
-    default => $::cloudera_autoupgrade,
+  $cloudera_autoupgrade = getvar('::cloudera_autoupgrade')
+  if $cloudera_autoupgrade {
+    $autoupgrade = $::cloudera_autoupgrade
+  } else {
+    $autoupgrade = false
   }
   if is_string($autoupgrade) {
     $safe_autoupgrade = str2bool($autoupgrade)
@@ -110,9 +142,11 @@ class cloudera::params {
     $safe_autoupgrade = $autoupgrade
   }
 
-  $service_enable = $::cloudera_service_enable ? {
-    undef => true,
-    default => $::cloudera_service_enable,
+  $cloudera_service_enable = getvar('::cloudera_service_enable')
+  if $cloudera_service_enable {
+    $service_enable = $::cloudera_service_enable
+  } else {
+    $service_enable = true
   }
   if is_string($service_enable) {
     $safe_service_enable = str2bool($service_enable)
@@ -120,9 +154,11 @@ class cloudera::params {
     $safe_service_enable = $service_enable
   }
 
-  $cm_use_tls = $::cloudera_cm_use_tls ? {
-    undef => false,
-    default => $::cloudera_cm_use_tls,
+  $cloudera_cm_use_tls = getvar('::cloudera_cm_use_tls')
+  if $cloudera_cm_use_tls {
+    $cm_use_tls = $::cloudera_cm_use_tls
+  } else {
+    $cm_use_tls = false
   }
   if is_string($cm_use_tls) {
     $safe_cm_use_tls = str2bool($cm_use_tls)
@@ -130,9 +166,11 @@ class cloudera::params {
     $safe_cm_use_tls = $cm_use_tls
   }
 
-  $use_parcels = $::cloudera_use_parcels ? {
-    undef => true,
-    default => $::cloudera_use_parcels,
+  $cloudera_use_parcels = getvar('::cloudera_use_parcels')
+  if $cloudera_use_parcels {
+    $use_parcels = $::cloudera_use_parcels
+  } else {
+    $use_parcels = true
   }
   if is_string($use_parcels) {
     $safe_use_parcels = str2bool($use_parcels)
@@ -140,9 +178,11 @@ class cloudera::params {
     $safe_use_parcels = $use_parcels
   }
 
-  $install_lzo = $::cloudera_install_lzo ? {
-    undef => false,
-    default => $::cloudera_install_lzo,
+  $cloudera_install_lzo = getvar('::cloudera_install_lzo')
+  if $cloudera_install_lzo {
+    $install_lzo = $::cloudera_install_lzo
+  } else {
+    $install_lzo = false
   }
   if is_string($install_lzo) {
     $safe_install_lzo = str2bool($install_lzo)
@@ -150,9 +190,11 @@ class cloudera::params {
     $safe_install_lzo = $install_lzo
   }
 
-  $install_java = $::cloudera_install_java ? {
-    undef => true,
-    default => $::cloudera_install_java,
+  $cloudera_install_java = getvar('::cloudera_install_java')
+  if $cloudera_install_java {
+    $install_java = $::cloudera_install_java
+  } else {
+    $install_java = true
   }
   if is_string($install_java) {
     $safe_install_java = str2bool($install_java)
@@ -160,9 +202,11 @@ class cloudera::params {
     $safe_install_java = $install_java
   }
 
-  $install_jce = $::cloudera_install_jce ? {
-    undef => false,
-    default => $::cloudera_install_jce,
+  $cloudera_install_jce = getvar('::cloudera_install_jce')
+  if $cloudera_install_jce {
+    $install_jce = $::cloudera_install_jce
+  } else {
+    $install_jce = false
   }
   if is_string($install_jce) {
     $safe_install_jce = str2bool($install_jce)
@@ -170,9 +214,11 @@ class cloudera::params {
     $safe_install_jce = $install_jce
   }
 
-  $install_cmserver = $::cloudera_install_cmserver ? {
-    undef => false,
-    default => $::cloudera_install_cmserver,
+  $cloudera_install_cmserver = getvar('::cloudera_install_cmserver')
+  if $cloudera_install_cmserver {
+    $install_cmserver = $::cloudera_install_cmserver
+  } else {
+    $install_cmserver = false
   }
   if is_string($install_cmserver) {
     $safe_install_cmserver = str2bool($install_cmserver)
@@ -180,11 +226,11 @@ class cloudera::params {
     $safe_install_cmserver = $install_cmserver
   }
 
-  if $::operatingsystemmajrelease { # facter 1.7+
+  if getvar('::operatingsystemmajrelease') { # facter 1.7+
     $majdistrelease = $::operatingsystemmajrelease
-  } elsif $::lsbmajdistrelease {    # requires LSB to already be installed
+  } elsif getvar('::lsbmajdistrelease') {    # requires LSB to already be installed
     $majdistrelease = $::lsbmajdistrelease
-  } elsif $::os_maj_version {       # requires stahnma/epel
+  } elsif getvar('::os_maj_version') {       # requires stahnma/epel
     $majdistrelease = $::os_maj_version
   } else {
     $majdistrelease = regsubst($::operatingsystemrelease,'^(\d+)\.(\d+)','\1')
@@ -202,7 +248,7 @@ class cloudera::params {
   $db_host       = 'localhost'
   $db_port       = '3306'
   $db_user       = 'root'
-  $db_pass       = ''
+  $db_pass       = undef
   $db_type       = 'embedded'
 
   case $::operatingsystem {
@@ -219,6 +265,11 @@ class cloudera::params {
       $cg5_repopath = "/gplextras5/redhat/${majdistrelease}/${::architecture}/gplextras/"
       $tls_dir = '/etc/pki/tls'
       $lzo_package_name = 'lzo'
+      $cdh_aptkey = undef
+      $cm_aptkey = undef
+      $ci_aptkey = undef
+      $cs_aptkey = undef
+      $cg_aptkey = undef
     }
     'SLES': {
       $java_package_name = 'jdk'
@@ -234,6 +285,11 @@ class cloudera::params {
       $cg5_repopath = "/gplextras5/sles/${majdistrelease}/${::architecture}/gplextras/"
       $tls_dir = '/etc/ssl'
       $lzo_package_name = 'liblzo2-2'
+      $cdh_aptkey = undef
+      $cm_aptkey = undef
+      $ci_aptkey = undef
+      $cs_aptkey = undef
+      $cg_aptkey = undef
     }
     'Debian': {
       $java_package_name = 'oracle-j2sdk1.6'
@@ -283,29 +339,39 @@ class cloudera::params {
     }
   }
 
-  $verify_cert_file = $::cloudera_verify_cert_file ? {
-    undef   => "${tls_dir}/certs/cloudera_manager.crt",
-    default => $::cloudera_verify_cert_file,
+  $cloudera_verify_cert_file = getvar('::cloudera_verify_cert_file')
+  if $cloudera_verify_cert_file {
+    $verify_cert_file = $::cloudera_verify_cert_file
+  } else {
+    $verify_cert_file = "${tls_dir}/certs/cloudera_manager.crt"
   }
 
-  $server_ca_file = $::cloudera_server_ca_file ? {
-    undef   => "${tls_dir}/certs/cloudera_manager-ca.crt",
-    default => $::cloudera_server_ca_file,
+  $cloudera_server_ca_file = getvar('::cloudera_server_ca_file')
+  if $cloudera_server_ca_file {
+    $server_ca_file = $::cloudera_server_ca_file
+  } else {
+    $server_ca_file = "${tls_dir}/certs/cloudera_manager-ca.crt"
   }
 
-  $server_cert_file = $::cloudera_server_cert_file ? {
-    undef   => "${tls_dir}/certs/${::fqdn}-cloudera_manager.crt",
-    default => $::cloudera_server_cert_file,
+  $cloudera_server_cert_file = getvar('::cloudera_server_cert_file')
+  if $cloudera_server_cert_file {
+    $server_cert_file = $::cloudera_server_cert_file
+  } else {
+    $server_cert_file = "${tls_dir}/certs/${::fqdn}-cloudera_manager.crt"
   }
 
-  $server_key_file = $::cloudera_server_key_file ? {
-    undef   => "${tls_dir}/private/${::fqdn}-cloudera_manager.key",
-    default => $::cloudera_server_key_file,
+  $cloudera_server_key_file = getvar('::cloudera_server_key_file')
+  if $cloudera_server_key_file {
+    $server_key_file = $::cloudera_server_key_file
+  } else {
+    $server_key_file = "${tls_dir}/private/${::fqdn}-cloudera_manager.key"
   }
 
-  $parcel_dir = $::cloudera_parcel_dir ? {
-    undef => '/opt/cloudera/parcels',
-    default => $::cloudera_parcel_dir,
+  $cloudera_parcel_dir = getvar('::cloudera_parcel_dir')
+  if $cloudera_parcel_dir {
+    $parcel_dir = $::cloudera_parcel_dir
+  } else {
+    $parcel_dir = '/opt/cloudera/parcels'
   }
 
 }

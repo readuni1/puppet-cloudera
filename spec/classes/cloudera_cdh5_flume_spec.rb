@@ -22,7 +22,9 @@ describe 'cloudera::cdh5::flume', :type => 'class' do
 #      let(:params) {{}}
       let :facts do {
         :osfamily        => 'RedHat',
-        :operatingsystem => 'CentOS'
+        :operatingsystem => 'CentOS',
+        :operatingsystemrelease => '6.0',
+        :operatingsystemmajrelease => '6'
       }
       end
       it { should contain_package('flume-ng').with_ensure('present') }
@@ -32,7 +34,11 @@ describe 'cloudera::cdh5::flume', :type => 'class' do
     context 'Ubuntu' do
       let :facts do {
         :osfamily        => 'Debian',
-        :operatingsystem => 'Ubuntu'
+        :operatingsystem => 'Ubuntu',
+        :lsbdistcodename => 'trusty',
+#        :architecture    => 'amd64',
+        :operatingsystemrelease => '14.04',
+        :lsbmajdistrelease      => '14'
       }
       end
       it { should_not contain_service('flume-ng') }

@@ -20,8 +20,13 @@ describe 'cloudera::cdh5::oozie::ext', :type => 'class' do
   context 'on a supported operatingsystem, default parameters' do
     let(:params) {{}}
     let :facts do {
-      :osfamily        => 'RedHat',
-      :operatingsystem => 'CentOS'
+      :osfamily               => 'RedHat',
+      :operatingsystem        => 'CentOS',
+      :operatingsystemrelease => '6.0',
+      :operatingsystemmajrelease => '6',
+      :architecture           => 'x86_64',
+      :staging_http_get       => 'curl',
+      :path                   => '/bin:/usr/bin'
     }
     end
     it { should contain_staging__deploy('ext-2.2.zip').with(

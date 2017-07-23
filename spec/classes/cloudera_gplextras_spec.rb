@@ -19,11 +19,14 @@ describe 'cloudera::gplextras', :type => 'class' do
 
   context 'on a supported operatingsystem, default parameters' do
     context 'CentOS 5.10' do
+      let(:pre_condition) { 'class {"epel":}' }
       let(:params) {{}}
       let :facts do {
         :osfamily               => 'RedHat',
         :operatingsystem        => 'CentOS',
-        :operatingsystemrelease => '5.10'
+        :operatingsystemrelease => '5.10',
+        :operatingsystemmajrelease => '5',
+        :architecture           => 'x86_64'
       }
       end
       it { should contain_class('epel') }
@@ -37,7 +40,9 @@ describe 'cloudera::gplextras', :type => 'class' do
       let :facts do {
         :osfamily               => 'RedHat',
         :operatingsystem        => 'OracleLinux',
-        :operatingsystemrelease => '6.5'
+        :operatingsystemrelease => '6.5',
+        :operatingsystemmajrelease => '6',
+        :architecture           => 'x86_64'
       }
       end
       it { should_not contain_class('epel') }
@@ -51,7 +56,11 @@ describe 'cloudera::gplextras', :type => 'class' do
       let :facts do {
         :osfamily               => 'Debian',
         :operatingsystem        => 'Ubuntu',
-        :operatingsystemrelease => '10.04.4'
+        :operatingsystemrelease => '10.04.4',
+        :architecture           => 'amd64',
+        :lsbdistcodename        => 'lucid',
+        :lsbdistid              => 'Ubuntu',
+        :lsbmajdistrelease      => '10'
       }
       end
       it { should_not contain_class('epel') }
