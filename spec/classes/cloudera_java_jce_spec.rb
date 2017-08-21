@@ -55,6 +55,7 @@ describe 'cloudera::java::jce', :type => 'class' do
   end
 
   context 'on a supported operatingsystem, custom parameters' do
+    let(:pre_condition) { 'class {"cloudera::java":}' }
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'OracleLinux',
