@@ -162,6 +162,11 @@ describe 'cloudera', :type => 'class' do
       let(:params) {{ :install_cmserver => true }}
       it { should contain_class('cloudera::cm5::server').with_ensure('present') }
     end
+
+    describe 'manage_sysctl => false' do
+      let(:params) {{ :manage_sysctl => false }}
+      it { should_not contain_sysctl('vm.swappiness') }
+    end
   end
 
   context 'on a supported operatingsystem, custom parameters, cm_version => 4' do

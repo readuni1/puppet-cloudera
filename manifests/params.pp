@@ -135,6 +135,13 @@ class cloudera::params {
     $proxy_password = 'absent'
   }
 
+  $cloudera_manage_sysctl = getvar('::cloudera_manage_sysctl')
+  if $cloudera_manage_sysctl {
+    $manage_sysctl = $::cloudera_manage_sysctl
+  } else {
+    $manage_sysctl = true
+  }
+
   # Since the top scope variable could be a string (if from an ENC), we might
   # need to convert it to a boolean.
   $cloudera_autoupgrade = getvar('::cloudera_autoupgrade')

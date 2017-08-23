@@ -221,6 +221,11 @@
 #   The sysctl value for vm.swappiness.
 #   Default: 1
 #
+# [*manage_sysctl*]
+#   Boolean flag that determines whether this module will manage sysctl or not.
+#   Need to resolve conflicts with other modules that manage sysctl.
+#   Default: true
+#
 # === Actions:
 #
 # Installs YUM repository configuration files.
@@ -309,7 +314,8 @@ class cloudera (
   $proxy_username   = $cloudera::params::proxy_username,
   $proxy_password   = $cloudera::params::proxy_password,
   $parcel_dir       = $cloudera::params::parcel_dir,
-  $vm_swappiness    = $cloudera::params::vm_swappiness
+  $vm_swappiness    = $cloudera::params::vm_swappiness,
+  $manage_sysctl    = $cloudera::params::manage_sysctl
 ) inherits cloudera::params {
   # Validate our booleans
   validate_bool($autoupgrade)
@@ -321,17 +327,20 @@ class cloudera (
   validate_bool($install_jce)
   validate_bool($install_cmserver)
   validate_integer($vm_swappiness, 100, 0)
+  validate_bool($manage_sysctl)
 
   anchor { 'cloudera::begin': }
   anchor { 'cloudera::end': }
 
-  sysctl { 'vm.swappiness':
-    ensure  => $ensure,
-    value   => $vm_swappiness,
-    apply   => true,
-    comment => 'Cloudera recommended setting.',
-    require => Anchor['cloudera::begin'],
-    before  => Anchor['cloudera::end'],
+  if $manage_sysctl {
+    sysctl { 'vm.swappiness':
+      ensure  => $ensure,
+      value   => $vm_swappiness,
+      apply   => true,
+      comment => 'Cloudera recommended setting.',
+      require => Anchor['cloudera::begin'],
+      before  => Anchor['cloudera::end'],
+    }
   }
 
   exec { 'disable_transparent_hugepage_defrag':

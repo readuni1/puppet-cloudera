@@ -549,6 +549,11 @@ Default: absent
 The directory where parcels are downloaded and distributed.
 Default: /opt/cloudera/parcels
 
+#### `manage_sysctl`
+
+Boolean flag that determines whether this module will manage sysctl or not.  There may be other modules managing sysctl and this boolean can be used to resolve those conflicts.
+Default: true
+
 ## Limitations
 
 ### OS Support:
