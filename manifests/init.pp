@@ -219,7 +219,7 @@
 #
 # [*vm_swappiness*]
 #   The sysctl value for vm.swappiness.
-#   Default: 0
+#   Default: 1
 #
 # === Actions:
 #
@@ -327,7 +327,7 @@ class cloudera (
 
   sysctl { 'vm.swappiness':
     ensure  => $ensure,
-    value   => "${vm_swappiness}",
+    value   => $vm_swappiness,
     apply   => true,
     comment => 'Cloudera recommended setting.',
     require => Anchor['cloudera::begin'],

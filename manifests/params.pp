@@ -91,9 +91,11 @@ class cloudera::params {
     $oozie_ext = 'http://archive.cloudera.com/gplextras/misc/ext-2.2.zip'
   }
 
-  $vm_swappiness = $::cloudera_vm_swappiness ? {
-    undef => 0,
-    default => $::cloudera_vm_swappiness,
+  $cloudera_vm_swappiness = getvar('::cloudera_vm_swappiness')
+  if $cloudera_vm_swappiness {
+    $vm_swappiness = $::cloudera_vm_swappiness
+  } else {
+    $vm_swappiness = '1'
   }
 
   ### The following parameters should not need to be changed.
