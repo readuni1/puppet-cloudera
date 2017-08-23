@@ -30,7 +30,7 @@ describe 'cloudera', :type => 'class' do
     it { should compile.with_all_deps }
     it { should contain_sysctl('vm.swappiness').with(
       :ensure => 'present',
-      :value  => '0',
+      :value  => '1',
       :apply  => 'true'
     )}
     it { should contain_exec('disable_transparent_hugepage_defrag') }
