@@ -202,7 +202,7 @@ file { "/etc/pki/tls/private/${::fqdn}-cloudera_manager.key": }
 
 ### External Database
 
-If you decide not to use the embedded database, the Cloudera Manager server database configuration can be completed by configuring this module to call the [`scm_prepare_database.sh`](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_install_path_B.html?scroll=cmig_topic_6_6_5_unique_1__section_y3j_pyp_bm_unique_1) script.  The external database must be configured and ready for connection with the supplied credentials via some method outside of this module.
+If you decide not to use the embedded database, an external database can be utilized.  The external database must be [prepared and ready for connection](https://www.cloudera.com/documentation/enterprise/5-5-x/topics/cm_ig_installing_configuring_dbs.html#concept_i2r_m3m_hn) with the required credentials via some method outside of this module.  This module will then call the [`scm_prepare_database.sh`](https://www.cloudera.com/documentation/enterprise/5-5-x/topics/cm_ig_installing_configuring_dbs.html#concept_i2r_m3m_hn__section_qjj_pyp_bm) script.
 
 ```puppet
 class { '::cloudera':
