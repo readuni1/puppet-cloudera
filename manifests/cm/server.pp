@@ -184,6 +184,9 @@ class cloudera::cm::server (
     ensure  => $file_ensure,
     path    => '/etc/cloudera-scm-server/db.properties',
     content => $file_content,
+    mode    => '0600',
+    owner   => 'cloudera-scm',
+    group   => 'cloudera-scm',
     require => Package['cloudera-manager-server'],
     notify  => Service['cloudera-scm-server'],
   }
