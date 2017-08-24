@@ -30,7 +30,10 @@ describe 'cloudera::cm::server', :type => 'class' do
     it { should contain_package('cloudera-manager-server').with_ensure('present') }
     it { should contain_file('/etc/cloudera-scm-server/db.properties').with(
       :ensure => 'present',
-      :path   => '/etc/cloudera-scm-server/db.properties'
+      :path   => '/etc/cloudera-scm-server/db.properties',
+      :mode   => '0600',
+      :owner  => 'cloudera-scm',
+      :group  => 'cloudera-scm'
     )}
     it { should contain_service('cloudera-scm-server').with(
       :ensure     => 'running',
