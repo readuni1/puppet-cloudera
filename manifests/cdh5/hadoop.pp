@@ -17,7 +17,7 @@ class cloudera::cdh5::hadoop {
   anchor { 'cloudera::cdh5::hadoop::begin': }
   anchor { 'cloudera::cdh5::hadoop::end': }
 
-  class { 'cloudera::cdh5::hadoop::client':
+  class { '::cloudera::cdh5::hadoop::client':
 #    ensure      => $ensure,
 #    autoupgrade => $autoupgrade,
     require => Anchor['cloudera::cdh5::hadoop::begin'],

@@ -359,7 +359,7 @@ class cloudera (
   }
 
   if $install_lzo {
-    class { 'cloudera::lzo':
+    class { '::cloudera::lzo':
       require => Anchor['cloudera::begin'],
       before  => Anchor['cloudera::end'],
     }
@@ -368,14 +368,14 @@ class cloudera (
   if $cm_version =~ /^5/ {
     if $install_java {
       Class['cloudera::cm5::repo'] -> Class['cloudera::java5']
-      class { 'cloudera::java5':
+      class { '::cloudera::java5':
         ensure      => $ensure,
         autoupgrade => $autoupgrade,
         require     => Anchor['cloudera::begin'],
         before      => Anchor['cloudera::end'],
       }
       if $install_jce {
-        class { 'cloudera::java5::jce':
+        class { '::cloudera::java5::jce':
           ensure  => $ensure,
           require => [ Anchor['cloudera::begin'], Class['cloudera::java5'], ],
           before  => Anchor['cloudera::end'],
@@ -391,7 +391,7 @@ class cloudera (
 #    Package<|tag == 'jdk' and (tag == 'sun' or tag == 'oracle')|> -> Package<|tag == 'cloudera-cdh4'|>
 #    Package<|tag == 'jdk' and (tag == 'sun' or tag == 'oracle')|> -> Package<|tag == 'cloudera-impala'|>
 
-    class { 'cloudera::cm5':
+    class { '::cloudera::cm5':
       ensure           => $ensure,
       autoupgrade      => $autoupgrade,
       service_ensure   => $service_ensure,
@@ -404,7 +404,7 @@ class cloudera (
       parcel_dir       => $parcel_dir,
       before           => Anchor['cloudera::end'],
     }
-    class { 'cloudera::cm5::repo':
+    class { '::cloudera::cm5::repo':
       ensure            => $ensure,
       reposerver        => $cm_reposerver,
       repopath          => $cm5_repopath,
@@ -418,7 +418,7 @@ class cloudera (
       before            => Anchor['cloudera::end'],
     }
     if $install_cmserver {
-      class { 'cloudera::cm5::server':
+      class { '::cloudera::cm5::server':
         ensure            => $ensure,
         autoupgrade       => $autoupgrade,
         service_ensure    => $service_ensure,
@@ -443,7 +443,7 @@ class cloudera (
     # Skip installing the CDH RPMs if we are going to use parcels.
     if ! $use_parcels {
       if $cdh_version =~ /^5/ {
-        class { 'cloudera::cdh5::repo':
+        class { '::cloudera::cdh5::repo':
           ensure            => $ensure,
           reposerver        => $cdh_reposerver,
           repopath          => $cdh5_repopath,
@@ -456,7 +456,7 @@ class cloudera (
           require           => Anchor['cloudera::begin'],
           before            => Anchor['cloudera::end'],
         }
-        class { 'cloudera::cdh5':
+        class { '::cloudera::cdh5':
           ensure         => $ensure,
           autoupgrade    => $autoupgrade,
           service_ensure => $service_ensure,
@@ -468,7 +468,7 @@ class cloudera (
           if $cg_version !~ /^5/ {
             fail('Parameter $cg_version must be 5 if $cdh_version is 5.')
           }
-          class { 'cloudera::gplextras5::repo':
+          class { '::cloudera::gplextras5::repo':
             ensure            => $ensure,
             reposerver        => $cg_reposerver,
             repopath          => $cg5_repopath,
@@ -481,7 +481,7 @@ class cloudera (
             require           => Anchor['cloudera::begin'],
             before            => Anchor['cloudera::end'],
           }
-          class { 'cloudera::gplextras5':
+          class { '::cloudera::gplextras5':
             ensure      => $ensure,
             autoupgrade => $autoupgrade,
             require     => Anchor['cloudera::begin'],
@@ -489,7 +489,7 @@ class cloudera (
           }
         }
       } elsif $cdh_version =~ /^4/ {
-        class { 'cloudera::cdh::repo':
+        class { '::cloudera::cdh::repo':
           ensure            => $ensure,
           reposerver        => $cdh_reposerver,
           repopath          => $cdh_repopath,
@@ -502,7 +502,7 @@ class cloudera (
           require           => Anchor['cloudera::begin'],
           before            => Anchor['cloudera::end'],
         }
-        class { 'cloudera::impala::repo':
+        class { '::cloudera::impala::repo':
           ensure            => $ensure,
           reposerver        => $ci_reposerver,
           repopath          => $ci_repopath,
@@ -515,7 +515,7 @@ class cloudera (
           require           => Anchor['cloudera::begin'],
           before            => Anchor['cloudera::end'],
         }
-        class { 'cloudera::search::repo':
+        class { '::cloudera::search::repo':
           ensure            => $ensure,
           reposerver        => $cs_reposerver,
           repopath          => $cs_repopath,
@@ -528,7 +528,7 @@ class cloudera (
           require           => Anchor['cloudera::begin'],
           before            => Anchor['cloudera::end'],
         }
-        class { 'cloudera::cdh':
+        class { '::cloudera::cdh':
           ensure         => $ensure,
           autoupgrade    => $autoupgrade,
           service_ensure => $service_ensure,
@@ -536,7 +536,7 @@ class cloudera (
           require        => Anchor['cloudera::begin'],
           before         => Anchor['cloudera::end'],
         }
-        class { 'cloudera::impala':
+        class { '::cloudera::impala':
           ensure         => $ensure,
           autoupgrade    => $autoupgrade,
           service_ensure => $service_ensure,
@@ -544,7 +544,7 @@ class cloudera (
           require        => Anchor['cloudera::begin'],
           before         => Anchor['cloudera::end'],
         }
-        class { 'cloudera::search':
+        class { '::cloudera::search':
           ensure         => $ensure,
           autoupgrade    => $autoupgrade,
           service_ensure => $service_ensure,
@@ -556,7 +556,7 @@ class cloudera (
           if $cg_version !~ /^4/ {
             fail('Parameter $cg_version must be 4 if $cdh_version is 4.')
           }
-          class { 'cloudera::gplextras::repo':
+          class { '::cloudera::gplextras::repo':
             ensure            => $ensure,
             reposerver        => $cg_reposerver,
             repopath          => $cg_repopath,
@@ -569,7 +569,7 @@ class cloudera (
             require           => Anchor['cloudera::begin'],
             before            => Anchor['cloudera::end'],
           }
-          class { 'cloudera::gplextras':
+          class { '::cloudera::gplextras':
             ensure      => $ensure,
             autoupgrade => $autoupgrade,
             require     => Anchor['cloudera::begin'],
@@ -583,14 +583,14 @@ class cloudera (
   } elsif $cm_version =~ /^4/ {
     if $install_java {
       Class['cloudera::cm::repo'] -> Class['cloudera::java']
-      class { 'cloudera::java':
+      class { '::cloudera::java':
         ensure      => $ensure,
         autoupgrade => $autoupgrade,
         require     => Anchor['cloudera::begin'],
         before      => Anchor['cloudera::end'],
       }
       if $install_jce {
-        class { 'cloudera::java::jce':
+        class { '::cloudera::java::jce':
           ensure  => $ensure,
           require => [ Anchor['cloudera::begin'], Class['cloudera::java'], ],
           before  => Anchor['cloudera::end'],
@@ -606,7 +606,7 @@ class cloudera (
 #    Package<|tag == 'jdk' and (tag == 'sun' or tag == 'oracle')|> -> Package<|tag == 'cloudera-cdh4'|>
 #    Package<|tag == 'jdk' and (tag == 'sun' or tag == 'oracle')|> -> Package<|tag == 'cloudera-impala'|>
 
-    class { 'cloudera::cm':
+    class { '::cloudera::cm':
       ensure           => $ensure,
       autoupgrade      => $autoupgrade,
       service_ensure   => $service_ensure,
@@ -619,7 +619,7 @@ class cloudera (
       parcel_dir       => $parcel_dir,
       before           => Anchor['cloudera::end'],
     }
-    class { 'cloudera::cm::repo':
+    class { '::cloudera::cm::repo':
       ensure            => $ensure,
       reposerver        => $cm_reposerver,
       repopath          => $cm_repopath,
@@ -633,7 +633,7 @@ class cloudera (
       before            => Anchor['cloudera::end'],
     }
     if $install_cmserver {
-      class { 'cloudera::cm::server':
+      class { '::cloudera::cm::server':
         ensure            => $ensure,
         autoupgrade       => $autoupgrade,
         service_ensure    => $service_ensure,
@@ -657,7 +657,7 @@ class cloudera (
     }
     # Skip installing the CDH RPMs if we are going to use parcels.
     if ! $use_parcels {
-      class { 'cloudera::cdh::repo':
+      class { '::cloudera::cdh::repo':
         ensure            => $ensure,
         reposerver        => $cdh_reposerver,
         repopath          => $cdh_repopath,
@@ -670,7 +670,7 @@ class cloudera (
         require           => Anchor['cloudera::begin'],
         before            => Anchor['cloudera::end'],
       }
-      class { 'cloudera::impala::repo':
+      class { '::cloudera::impala::repo':
         ensure            => $ensure,
         reposerver        => $ci_reposerver,
         repopath          => $ci_repopath,
@@ -683,7 +683,7 @@ class cloudera (
         require           => Anchor['cloudera::begin'],
         before            => Anchor['cloudera::end'],
       }
-      class { 'cloudera::search::repo':
+      class { '::cloudera::search::repo':
         ensure            => $ensure,
         reposerver        => $cs_reposerver,
         repopath          => $cs_repopath,
@@ -696,7 +696,7 @@ class cloudera (
         require           => Anchor['cloudera::begin'],
         before            => Anchor['cloudera::end'],
       }
-      class { 'cloudera::cdh':
+      class { '::cloudera::cdh':
         ensure         => $ensure,
         autoupgrade    => $autoupgrade,
         service_ensure => $service_ensure,
@@ -704,7 +704,7 @@ class cloudera (
         require        => Anchor['cloudera::begin'],
         before         => Anchor['cloudera::end'],
       }
-      class { 'cloudera::impala':
+      class { '::cloudera::impala':
         ensure         => $ensure,
         autoupgrade    => $autoupgrade,
         service_ensure => $service_ensure,
@@ -712,7 +712,7 @@ class cloudera (
         require        => Anchor['cloudera::begin'],
         before         => Anchor['cloudera::end'],
       }
-      class { 'cloudera::search':
+      class { '::cloudera::search':
         ensure         => $ensure,
         autoupgrade    => $autoupgrade,
         service_ensure => $service_ensure,
@@ -724,7 +724,7 @@ class cloudera (
         if $cg_version !~ /^4/ {
           fail('Parameter $cg_version must be 4 if $cdh_version is 4.')
         }
-        class { 'cloudera::gplextras::repo':
+        class { '::cloudera::gplextras::repo':
           ensure            => $ensure,
           reposerver        => $cg_reposerver,
           repopath          => $cg_repopath,
@@ -737,7 +737,7 @@ class cloudera (
           require           => Anchor['cloudera::begin'],
           before            => Anchor['cloudera::end'],
         }
-        class { 'cloudera::gplextras':
+        class { '::cloudera::gplextras':
           ensure      => $ensure,
           autoupgrade => $autoupgrade,
           require     => Anchor['cloudera::begin'],
