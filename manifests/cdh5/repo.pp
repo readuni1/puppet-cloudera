@@ -58,14 +58,16 @@
 # Copyright (C) 2013 Mike Arnold, unless otherwise noted.
 #
 class cloudera::cdh5::repo (
-  $ensure         = $cloudera::params::ensure,
-  $reposerver     = $cloudera::params::cdh_reposerver,
-  $repopath       = $cloudera::params::cdh5_repopath,
-  $version        = $cloudera::params::cdh_version,
-  $aptkey         = $cloudera::params::cdh_aptkey,
-  $proxy          = $cloudera::params::proxy,
-  $proxy_username = $cloudera::params::proxy_username,
-  $proxy_password = $cloudera::params::proxy_password
+  $ensure            = $cloudera::params::ensure,
+  $reposerver        = $cloudera::params::cdh_reposerver,
+  $repopath          = $cloudera::params::cdh5_repopath,
+  $version           = $cloudera::params::cdh_version,
+  $yum_repo_priority = $cloudera::params::yum_repo_priority,
+  $yum_repo_protect  = $cloudera::params::yum_repo_protect,
+  $aptkey            = $cloudera::params::cdh_aptkey,
+  $proxy             = $cloudera::params::proxy,
+  $proxy_username    = $cloudera::params::proxy_username,
+  $proxy_password    = $cloudera::params::proxy_password
 ) inherits cloudera::params {
   case $ensure {
     /(present)/: {
@@ -87,8 +89,8 @@ class cloudera::cdh5::repo (
         gpgcheck       => 1,
         gpgkey         => "${reposerver}${repopath}RPM-GPG-KEY-cloudera",
         baseurl        => "${reposerver}${repopath}${version}/",
-        priority       => $cloudera::params::yum_priority,
-        protect        => $cloudera::params::yum_protect,
+        priority       => $yum_repo_priority,
+        protect        => $yum_repo_protect,
         proxy          => $proxy,
         proxy_username => $proxy_username,
         proxy_password => $proxy_password,
@@ -111,7 +113,7 @@ class cloudera::cdh5::repo (
         gpgkey      => "${reposerver}${repopath}RPM-GPG-KEY-cloudera",
         baseurl     => "${reposerver}${repopath}${version}/",
         autorefresh => 1,
-        priority    => $cloudera::params::yum_priority,
+        priority    => $yum_repo_priority,
       }
 
       file { '/etc/zypp/repos.d/cloudera-cdh5.repo':
