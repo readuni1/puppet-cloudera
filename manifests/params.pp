@@ -17,14 +17,18 @@ class cloudera::params {
 
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
-  $yum_repo_priority = $::cloudera_yum_repo_priority ? {
-    undef   => '50',
-    default => $::cloudera_yum_repo_priority,
+  $cloudera_yum_repo_priority = getvar('::cloudera_yum_repo_priority')
+  if $cloudera_yum_repo_priority {
+    $yum_repo_priority = $::cloudera_yum_repo_priority
+  } else {
+    $yum_repo_priority = '50'
   }
 
-  $yum_repo_protect = $::cloudera_yum_repo_protect ? {
-    undef   => '0',
-    default => $::cloudera_yum_repo_protect,
+  $cloudera_yum_repo_protect = getvar('::cloudera_yum_repo_protect')
+  if $cloudera_yum_repo_protect {
+    $yum_repo_protect = $::cloudera_yum_repo_protect
+  } else {
+    $yum_repo_protect = '0'
   }
 
   $cloudera_cdh_reposerver = getvar('::cloudera_cdh_reposerver')
