@@ -549,6 +549,16 @@ Default: absent
 The directory where parcels are downloaded and distributed.
 Default: /opt/cloudera/parcels
 
+#### `yum_repo_priority`
+
+The priority of the yum repository.
+Default: 50
+
+#### `yum_repo_protect`
+
+The protect flag for yum repository.
+Default: 0
+
 #### `manage_sysctl`
 
 Boolean flag that determines whether this module will manage sysctl or not.  There may be other modules managing sysctl and this boolean can be used to resolve those conflicts.
@@ -603,4 +613,3 @@ Licensed under the Apache License, Version 2.0.
 [razorsedge/puppet-cloudera on GitHub](https://github.com/razorsedge/puppet-cloudera)
 
 [razorsedge/cloudera on Puppet Forge](http://forge.puppetlabs.com/razorsedge/cloudera)
-
