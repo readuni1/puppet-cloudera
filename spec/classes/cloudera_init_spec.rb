@@ -35,6 +35,7 @@ describe 'cloudera', :type => 'class' do
     )}
     it { should contain_exec('disable_transparent_hugepage_defrag') }
     it { should contain_exec('disable_redhat_transparent_hugepage_defrag') }
+    it { should contain_exec('disable_transparent_hugepage_enabled') }
     it { should contain_class('cloudera::java5').with_ensure('present') }
     it { should_not contain_class('cloudera::java5::jce') }
     it { should contain_class('cloudera::cm5::repo').with_ensure('present') }
