@@ -22,7 +22,7 @@ normal
   5. Run the tests. We only take pull requests with passing tests. `bundle exec rake spec SPEC_OPTS='--format documentation'`
   6. Add or update documentation.
   7. Squash your commits down into logical components. Make sure to rebase against the current `develop` branch. `git pull --rebase upstream develop`
-  8. Publish your featue. `git flow feature publish my-feature`
+  8. Publish your feature. `git flow feature publish my-feature`
   9. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch against the develop branch.
 
 Testing
