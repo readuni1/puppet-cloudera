@@ -152,6 +152,8 @@ class { 'cloudera':
 
 - The [herculesteam/augeasproviders](https://forge.puppetlabs.com/herculesteam/augeasproviders) modules will replace [domcleal/augeasproviders](https://forge.puppetlabs.com/domcleal/augeasproviders) for the 3.0.0 release.
 
+- Support for Puppet 2.7 and 3 and Ruby 1.8.7 will be dropped for the 4.0.0 release.
+
 
 ## Usage
 
