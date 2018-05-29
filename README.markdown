@@ -154,6 +154,10 @@ class { 'cloudera':
 
 - Support for Puppet 2.7 and 3 and Ruby 1.8.7 will be dropped for the 4.0.0 release.
 
+- Support for Cloudera Manager 4 and CDH 4 will be dropped for the 4.0.0 release.
+
+- Support for installing CDH via packages will be dropped for the 4.0.0 release.  Support for Cloudera Manager will remain.
+
 
 ## Usage
 
