@@ -1,6 +1,8 @@
 fixtures:
   repositories:
-    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    stdlib:
+      repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+      ref: "4.22.0"
     mysql:
       repo: "https://github.com/puppetlabs/puppetlabs-mysql.git"
       ref: "3.11.0"
@@ -14,7 +16,9 @@ fixtures:
     epel:
       repo: "https://github.com/stahnma/puppet-module-epel.git"
       ref: "1.2.2"
-    java_ks: "https://github.com/puppetlabs/puppetlabs-java_ks.git"
+    java_ks:
+      repo: "https://github.com/puppetlabs/puppetlabs-java_ks.git"
+      ref: "1.6.0"
     zypprepo:
       repo: "https://github.com/deadpoint/puppet-zypprepo.git"
       ref: "v1.0.2"
