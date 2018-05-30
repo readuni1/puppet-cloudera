@@ -357,6 +357,18 @@ class cloudera (
     path     => '/usr/bin:/usr/sbin:/bin:/sbin',
     provider => 'shell',
   }
+  exec { 'disable_transparent_hugepage_enabled':
+      command  => 'if [ -f /sys/kernel/mm/transparent_hugepage/enabled ]; then echo never > /sys/kernel/mm/transparent_hugepage/enabled; fi',
+      unless   => 'if [ -f /sys/kernel/mm/transparent_hugepage/enabled ]; then grep -q "\[never\]" /sys/kernel/mm/transparent_hugepage/enabled; fi',
+      path     => '/usr/bin:/usr/sbin:/bin:/sbin',
+      provider => 'shell',
+  }
+  exec { 'disable_redhat_transparent_hugepage_enabled':
+      command  => 'if [ -f /sys/kernel/mm/redhat_transparent_hugepage/enabled ]; then echo never > /sys/kernel/mm/redhat_transparent_hugepage/enabled; fi',
+      unless   => 'if [ -f /sys/kernel/mm/redhat_transparent_hugepage/enabled ]; then grep -q "\[never\]" /sys/kernel/mm/redhat_transparent_hugepage/enabled; fi',
+      path     => '/usr/bin:/usr/sbin:/bin:/sbin',
+      provider => 'shell',
+  }
 
   if $install_lzo {
     class { '::cloudera::lzo':

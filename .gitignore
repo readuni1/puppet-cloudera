@@ -8,3 +8,4 @@ coverage/
 *.swp
 .vendor/
 .vendor
+.idea/
