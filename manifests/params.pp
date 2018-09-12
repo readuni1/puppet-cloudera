@@ -313,15 +313,19 @@ class cloudera::params {
     }
     'Ubuntu': {
       $java_package_name = 'oracle-j2sdk1.6'
-      $cdh_repopath = "/cdh4/ubuntu/${::lsbdistcodename}/${::architecture}/cdh/"
-      $cm_repopath = "/cm4/ubuntu/${::lsbdistcodename}/${::architecture}/cm/"
-      $ci_repopath = "/impala/ubuntu/${::lsbdistcodename}/${::architecture}/impala/"
-      $cs_repopath = "/search/ubuntu/${::lsbdistcodename}/${::architecture}/search/"
-      $cg_repopath = "/gplextras/ubuntu/${::lsbdistcodename}/${::architecture}/gplextras/"
+      $lsbdistcodename = $::lsbdistcodename ? {
+        'bionic' => 'xenial',
+        default  => $::lsbdistcodename,
+      }
+      $cdh_repopath = "/cdh4/ubuntu/${lsbdistcodename}/${::architecture}/cdh/"
+      $cm_repopath = "/cm4/ubuntu/${lsbdistcodename}/${::architecture}/cm/"
+      $ci_repopath = "/impala/ubuntu/${lsbdistcodename}/${::architecture}/impala/"
+      $cs_repopath = "/search/ubuntu/${lsbdistcodename}/${::architecture}/search/"
+      $cg_repopath = "/gplextras/ubuntu/${lsbdistcodename}/${::architecture}/gplextras/"
       $java5_package_name = 'oracle-j2sdk1.7'
-      $cm5_repopath = "/cm5/ubuntu/${::lsbdistcodename}/${::architecture}/cm/"
-      $cdh5_repopath = "/cdh5/ubuntu/${::lsbdistcodename}/${::architecture}/cdh/"
-      $cg5_repopath = "/gplextras5/ubuntu/${::lsbdistcodename}/${::architecture}/gplextras/"
+      $cm5_repopath = "/cm5/ubuntu/${lsbdistcodename}/${::architecture}/cm/"
+      $cdh5_repopath = "/cdh5/ubuntu/${lsbdistcodename}/${::architecture}/cdh/"
+      $cg5_repopath = "/gplextras5/ubuntu/${lsbdistcodename}/${::architecture}/gplextras/"
       $cdh_aptkey = false
       $cm_aptkey = '327574EE02A818DD'
       $ci_aptkey = false
