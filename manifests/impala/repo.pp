@@ -129,8 +129,10 @@ class cloudera::impala::repo (
         location     => "${reposerver}${repopath}",
         release      => "${::lsbdistcodename}-impala${version}",
         repos        => 'contrib',
-        key          => $aptkey,
-        source       => "${reposerver}${repopath}archive.key",
+        key          => {
+          id     => $aptkey,
+          source => "${reposerver}${repopath}archive.key",
+        }
         architecture => $cloudera::params::architecture,
       }
 

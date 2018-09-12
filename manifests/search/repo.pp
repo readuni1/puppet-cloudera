@@ -131,8 +131,10 @@ class cloudera::search::repo (
         location     => "${reposerver}${repopath}",
         release      => "${::lsbdistcodename}-search${version}",
         repos        => 'contrib',
-        key          => $aptkey,
-        source       => "${reposerver}${repopath}archive.key",
+        key          => {
+          id     => $aptkey,
+          source => "${reposerver}${repopath}archive.key",
+        }
         architecture => $cloudera::params::architecture,
       }
 

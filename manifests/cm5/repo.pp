@@ -136,8 +136,10 @@ class cloudera::cm5::repo (
         location     => "${reposerver}${repopath}",
         release      => "${::lsbdistcodename}-cm${version}",
         repos        => 'contrib',
-        key          => $aptkey,
-        source       => "${reposerver}${repopath}archive.key",
+        key          => {
+          id     => $aptkey,
+          source => "${reposerver}${repopath}archive.key",
+        }
         architecture => $cloudera::params::architecture,
       }
 

@@ -129,8 +129,10 @@ class cloudera::cdh::repo (
         location     => "${reposerver}${repopath}",
         release      => "${::lsbdistcodename}-cdh${version}",
         repos        => 'contrib',
-        key          => $aptkey,
-        source       => "${reposerver}${repopath}archive.key",
+        key          => {
+          id     => $aptkey,
+          source => "${reposerver}${repopath}archive.key",
+        }
         architecture => $cloudera::params::architecture,
       }
 
