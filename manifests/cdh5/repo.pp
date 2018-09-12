@@ -139,9 +139,13 @@ class cloudera::cdh5::repo (
               pin          => '501'
           }
       } else {
+          $lsbdistcodename = $::lsbdistcodename ? {
+            'bionic' => 'xenial',
+            default  => $::lsbdistcodename,
+          }
           apt::source { 'cloudera-cdh5':
               location     => "${reposerver}${repopath}",
-              release      => "${::lsbdistcodename}-cdh${version}",
+              release      => "${lsbdistcodename}-cdh${version}",
               repos        => 'contrib',
               key          => {
                 id     => $aptkey,
