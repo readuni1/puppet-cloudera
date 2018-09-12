@@ -132,7 +132,7 @@ class cloudera::gplextras::repo (
         key          => {
           id     => $aptkey,
           source => "${reposerver}${repopath}archive.key",
-        }
+        },
         architecture => $cloudera::params::architecture,
       }
 

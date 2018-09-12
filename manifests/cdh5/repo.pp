@@ -134,7 +134,7 @@ class cloudera::cdh5::repo (
               key          => {
                 id     => $aptkey,
                 source => "${reposerver}${repopath}archive.key",
-              }
+              },
               architecture => $cloudera::params::architecture,
               pin          => '501'
           }
@@ -146,7 +146,7 @@ class cloudera::cdh5::repo (
               key          => {
                 id     => $aptkey,
                 source => "${reposerver}${repopath}archive.key",
-              }
+              },
               architecture => $cloudera::params::architecture,
           }
       }
