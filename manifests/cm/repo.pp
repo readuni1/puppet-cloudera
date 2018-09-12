@@ -137,7 +137,7 @@ class cloudera::cm::repo (
         release      => "${::lsbdistcodename}-cm${version}",
         repos        => 'contrib',
         key          => $aptkey,
-        key_source   => "${reposerver}${repopath}archive.key",
+        source       => "${reposerver}${repopath}archive.key",
         architecture => $cloudera::params::architecture,
       }
 

@@ -130,7 +130,7 @@ class cloudera::gplextras5::repo (
         release      => "${::lsbdistcodename}-gplextras${version}",
         repos        => 'contrib',
         key          => $aptkey,
-        key_source   => "${reposerver}${repopath}archive.key",
+        source       => "${reposerver}${repopath}archive.key",
         architecture => $cloudera::params::architecture,
       }
 

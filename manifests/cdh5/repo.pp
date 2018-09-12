@@ -132,7 +132,7 @@ class cloudera::cdh5::repo (
               release      => "${::lsbdistcodename}-cdh${version}",
               repos        => 'contrib',
               key          => $aptkey,
-              key_source   => "${reposerver}${repopath}archive.key",
+              source       => "${reposerver}${repopath}archive.key",
               architecture => $cloudera::params::architecture,
               pin          => '501'
           }
@@ -142,7 +142,7 @@ class cloudera::cdh5::repo (
               release      => "${::lsbdistcodename}-cdh${version}",
               repos        => 'contrib',
               key          => $aptkey,
-              key_source   => "${reposerver}${repopath}archive.key",
+              source       => "${reposerver}${repopath}archive.key",
               architecture => $cloudera::params::architecture,
           }
       }
