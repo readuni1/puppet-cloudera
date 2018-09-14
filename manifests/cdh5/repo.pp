@@ -152,6 +152,7 @@ class cloudera::cdh5::repo (
                 source => "${reposerver}${repopath}archive.key",
               },
               architecture => $cloudera::params::architecture,
+              pin          => '501'
           }
       }
 
