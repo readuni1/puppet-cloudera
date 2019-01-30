@@ -18,7 +18,7 @@
 
 class cloudera::cdh5::zookeeper {
   package { 'zookeeper':
-    ensure => 'present',
+    ensure => 'held',
     tag    => 'cloudera-cdh5',
   }
 }
